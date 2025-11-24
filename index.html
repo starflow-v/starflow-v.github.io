@@ -1,0 +1,2428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STARFlow-V: End-to-End Video Generative Modeling with Normalizing Flows</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', system-ui, -webkit-system-font, 'Segoe UI', Roboto, sans-serif;
+            background: #000;
+            color: #fff;
+            line-height: 1.6;
+            font-weight: 400;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body.light-mode {
+            background: #fff;
+            color: #000;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        header {
+            text-align: center;
+            padding: 60px 0;
+            border-bottom: 1px solid #333;
+            background: linear-gradient(180deg, #000 0%, #0a0a0a 100%);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        body.light-mode header {
+            border-bottom: 1px solid #e0e0e0;
+            background: linear-gradient(180deg, #fff 0%, #f5f5f5 100%);
+        }
+
+        header a {
+            transition: color 0.2s ease;
+        }
+
+        header a:hover {
+            color: #007AFF !important;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #007AFF 0%, #5856D6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+
+        h2.subtitle {
+            color: #E0E0E0;
+            font-size: 1.5rem;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            color: #999;
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 0.01em;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 12px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .tab-button {
+            padding: 12px 24px;
+            background: #1C1C1E;
+            border: 1px solid #38383A;
+            color: #EBEBF5;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .tab-button:hover { background: #2C2C2E; transform: translateY(-2px); }
+        .tab-button.active { background: #007AFF; border-color: #007AFF; color: #fff; }
+        
+        .tab-content { display: none; animation: fadeIn 0.3s ease; }
+        .tab-content.active { display: block; }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        h2 { font-size: 2rem; font-weight: 600; margin-bottom: 15px; }
+        h3 { font-size: 1.5rem; font-weight: 600; margin: 30px 0 15px 0; color: #EBEBF5; }
+        .tab-content > p { color: #EBEBF5; margin-bottom: 40px; font-size: 1.1rem; }
+
+        /* Overview section styles */
+        .overview-section { margin-bottom: 50px; }
+        .tldr-box {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-left: 4px solid #007AFF;
+            padding: 25px 30px;
+            border-radius: 8px;
+            margin: 20px 0 40px 0;
+        }
+        .tldr-box p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: #E0E0E0;
+            margin: 0;
+        }
+
+        .contributions-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .contribution-card {
+            background: #1C1C1E;
+            border-radius: 12px;
+            padding: 30px;
+            border: 1px solid #38383A;
+            transition: all 0.3s ease;
+        }
+
+        .contribution-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 122, 255, 0.2);
+            border-color: #007AFF;
+        }
+
+        .contribution-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #007AFF 0%, #5856D6 100%);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        .contribution-card h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+
+        .contribution-card p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #B0B0B0;
+            margin: 0;
+        }
+
+        .pipeline-diagram {
+            background: #1C1C1E;
+            border-radius: 12px;
+            padding: 40px;
+            margin: 30px 0;
+            text-align: center;
+            border: 1px solid #38383A;
+        }
+
+        .pipeline-diagram img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .pipeline-placeholder {
+            background: #0a0a0a;
+            padding: 80px 40px;
+            border-radius: 8px;
+            border: 2px dashed #38383A;
+        }
+
+        .pipeline-placeholder p {
+            color: #666;
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .paper-links {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .paper-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: #1C1C1E;
+            border: 1px solid #007AFF;
+            color: #007AFF;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+
+        .paper-link:hover {
+            background: #007AFF;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .contributions-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        /* Image-to-Video section uses 2 columns */
+        #image-to-video .video-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        /* Video-to-Video section uses 3 columns */
+        #video-to-video .video-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .video-item {
+            background: #1C1C1E;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .video-item:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); }
+        
+        video { width: 100%; display: block; background: #000; }
+
+        .video-info { padding: 24px; }
+        .video-info h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 12px; line-height: 1.4; }
+        .video-details { color: #8E8E93; font-size: 0.9rem; }
+
+        /* Image-to-Video specific styles */
+        .side-by-side {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .input-frame, .output-video {
+            position: relative;
+        }
+
+        .input-frame img {
+            width: 100%;
+            display: block;
+            background: #000;
+            border-radius: 4px;
+        }
+
+        .side-by-side .label {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #8E8E93;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+
+        /* Comparison specific styles */
+        #comparisons .video-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, max-content));
+            gap: 40px;
+            justify-content: center;
+        }
+
+        #comparisons .video-item {
+            max-width: none;
+        }
+
+        .comparison-labels {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 8px;
+            gap: 10px;
+        }
+
+        .method-label {
+            font-size: 0.55rem;
+            font-weight: 400;
+            color: #8E8E93;
+            flex: 1;
+            text-align: center;
+        }
+
+        .method-label:last-child {
+            color: #007AFF;
+        }
+
+        footer { text-align: center; padding: 50px 0; border-top: 1px solid #333; margin-top: 60px; color: #8E8E93; }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            width: 50px;
+            height: 50px;
+            background: #007AFF;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 122, 255, 0.4);
+            z-index: 1000;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: #0051D5;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 122, 255, 0.6);
+        }
+
+        /* Theme toggle button */
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 8px 16px;
+            background: #1C1C1E;
+            border: 1px solid #38383A;
+            color: #EBEBF5;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .theme-toggle:hover {
+            background: #2C2C2E;
+            transform: translateY(-2px);
+        }
+
+        body.light-mode .theme-toggle {
+            background: #f0f0f0;
+            border-color: #d0d0d0;
+            color: #333;
+        }
+
+        body.light-mode .theme-toggle:hover {
+            background: #e0e0e0;
+        }
+
+        /* Light mode styles */
+        body.light-mode h2.subtitle {
+            color: #333;
+        }
+
+        body.light-mode .subtitle {
+            color: #666;
+        }
+
+        body.light-mode .tab-button {
+            background: #f0f0f0;
+            border-color: #d0d0d0;
+            color: #333;
+        }
+
+        body.light-mode .tab-button:hover {
+            background: #e0e0e0;
+        }
+
+        body.light-mode .tab-button.active {
+            background: #007AFF;
+            border-color: #007AFF;
+            color: #fff;
+        }
+
+        body.light-mode .tldr-box {
+            background: linear-gradient(135deg, #e6f0ff 0%, #e6e9ff 100%);
+            border-left-color: #007AFF;
+        }
+
+        body.light-mode .tldr-box p {
+            color: #333;
+        }
+
+        body.light-mode .contribution-card {
+            background: #f8f8f8;
+            border-color: #d0d0d0;
+        }
+
+        body.light-mode .contribution-card:hover {
+            border-color: #007AFF;
+        }
+
+        body.light-mode .contribution-card h4 {
+            color: #000;
+        }
+
+        body.light-mode .contribution-card p {
+            color: #555;
+        }
+
+        body.light-mode .pipeline-diagram {
+            background: #f8f8f8;
+            border-color: #d0d0d0;
+        }
+
+        body.light-mode .pipeline-placeholder {
+            background: #f0f0f0;
+            border-color: #d0d0d0;
+        }
+
+        body.light-mode .pipeline-placeholder p {
+            color: #999;
+        }
+
+        body.light-mode .paper-link {
+            background: #f0f0f0;
+            border-color: #007AFF;
+            color: #007AFF;
+        }
+
+        body.light-mode .paper-link:hover {
+            background: #007AFF;
+            color: #fff;
+        }
+
+        body.light-mode .video-item {
+            background: #f8f8f8;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        body.light-mode .video-item:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        body.light-mode .video-info h3 {
+            color: #000;
+        }
+
+        body.light-mode .video-details {
+            color: #666;
+        }
+
+        body.light-mode .method-label {
+            color: #666;
+        }
+
+        body.light-mode .method-label:last-child {
+            color: #007AFF;
+        }
+
+        body.light-mode footer {
+            border-top-color: #e0e0e0;
+            color: #666;
+        }
+
+        body.light-mode p, body.light-mode h3 {
+            color: #333;
+        }
+
+        body.light-mode h2 {
+            color: #000;
+        }
+
+        body.light-mode header a {
+            color: #555 !important;
+        }
+
+        body.light-mode header a:hover {
+            color: #007AFF !important;
+        }
+
+        body.light-mode .pipeline-diagram p {
+            color: #333 !important;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .subtitle { font-size: 1rem; }
+            .video-grid { grid-template-columns: 1fr; gap: 20px; }
+            .tabs { gap: 8px; }
+            .tab-button { padding: 10px 18px; font-size: 0.9rem; }
+            .back-to-top { bottom: 20px; right: 20px; width: 45px; height: 45px; font-size: 20px; }
+            .theme-toggle { top: 10px; right: 10px; padding: 6px 12px; font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+            <span id="themeIcon">☀️</span>
+            <span id="themeText">Light</span>
+        </button>
+        <div class="container">
+            <h1>STARFlow-V</h1>
+            <h2 class="subtitle">End-to-End Video Generative Modeling with Normalizing Flows</h2>
+
+            <div style="margin: 20px 0; color: #B0B0B0; font-size: 1rem;">
+                <p style="margin: 5px 0;">
+                    <a href="https://jiataogu.me" style="font-weight: 500; color: #B0B0B0; text-decoration: none;">Jiatao Gu</a>,
+                    <a href="https://yingshen-ys.github.io" style="font-weight: 500; color: #B0B0B0; text-decoration: none;">Ying Shen</a>,
+                    <a href="https://scholar.google.com/citations?user=r9D3Fg50gMoC&hl=zh-CN" style="font-weight: 500; color: #B0B0B0; text-decoration: none;">Tianrong Chen</a>,
+                    <a href="https://laurent-dinh.github.io" style="font-weight: 500; color: #B0B0B0; text-decoration: none;">Laurent Dinh</a>,
+                    <a href="https://yuyangw.github.io" style="font-weight: 500; color: #B0B0B0; text-decoration: none;">Yuyang Wang</a>,
+                    <a href="http://miguelbautista.info/" style="font-weight: 500; color: #B0B0B0; text-decoration: none;">Miguel Ángel Bautista</a>,
+                    </p>
+                <p style="margin: 5px 0;">
+                    <a href="https://david-berthelot.github.io" style="font-weight: 500; color: #B0B0B0; text-decoration: none;">David Berthelot</a>,
+                    <a href="https://scholar.google.com/citations?user=Sv2TGqsAAAAJ" style="font-weight: 500; color: #B0B0B0; text-decoration: none;">Josh Susskind</a>,
+                    <a href="https://scholar.google.com/citations?user=G6vdBYsAAAAJ&hl=en" style="font-weight: 500; color: #B0B0B0; text-decoration: none;">Shuangfei Zhai</a>
+                </p>
+                <p style="margin: 15px 0 5px 0; font-size: 0.95rem;">
+                    Apple
+                </p>
+            </div>
+
+            <div class="paper-links">
+                <a href="paper.pdf" class="paper-link">Paper</a>
+                <a href="#" class="paper-link">arXiv (Coming Soon)</a>
+                <a href="https://github.com/apple/ml-starflow" class="paper-link">Code</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <nav class="tabs">
+                <button class="tab-button active" data-tab="overview">Overview</button>
+                <button class="tab-button" data-tab="text-to-video">Text-to-Video</button>
+                <button class="tab-button" data-tab="image-to-video">Image-to-Video</button>
+                <button class="tab-button" data-tab="video-to-video">Video-to-Video</button>
+                <button class="tab-button" data-tab="longer-generation">Long Videos</button>
+                <button class="tab-button" data-tab="comparisons">Comparisons</button>
+                <button class="tab-button" data-tab="failure-cases">Failure Cases</button>
+            </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <section id="overview" class="tab-content active">
+                <!-- <h2>Overview</h2> -->
+                <div class="overview-section">
+                    <h3>TL;DR</h3>
+                    <div class="tldr-box">
+                        <p>
+                            STARFlow-V is the <b>first</b> normalizing flow-based <b>causal video generator</b> demonstrating that normalizing flows can match video diffusion models in visual quality while offering end-to-end training, exact likelihood estimation, and native multi-task support across T2V/I2V/V2V generation.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="overview-section">
+                    <h3>Abstract</h3>
+                    <p style="line-height: 1.8; text-align: justify;">
+                        Normalizing flows (NFs) are end-to-end likelihood-based generative models for continuous data, and have recently regained attention with encouraging progress on image generation. Yet in the video generation domain, where spatiotemporal complexity and computational cost are substantially higher, state-of-the-art systems almost exclusively rely on diffusion-based models. In this work, we revisit this design space by presenting STARFlow-V, a normalizing flow-based video generator with substantial benefits such as end-to-end learning, robust causal prediction, and native likelihood estimation. Building upon the recently proposed STARFlow, STARFlow-V operates in the spatiotemporal latent space with a global-local architecture which restricts causal dependencies to a global latent space while preserving rich local within-frame interactions. This eases error accumulation over time, a common pitfall of standard autoregressive diffusion model generation. Additionally, we propose flow-score matching, which equips the model with a light-weight causal denoiser to improve the video generation consistency in an autoregressive fashion. To improve the sampling efficiency, STARFlow-V employs a video-aware Jacobi iteration scheme that recasts inner updates as parallelizable iterations without breaking causality. Thanks to the invertible structure, the same model can natively support text-to-video, image-to-video as well as video-to-video generation tasks. Empirically, STARFlow-V achieves strong visual fidelity and temporal consistency with practical sampling throughput relative to diffusion-based baselines. These results present the first evidence, to our knowledge, that NFs are capable of high-quality autoregressive video generation, establishing them as a promising research direction for building world models.
+                    </p>
+                </div>
+
+                <div class="overview-section">
+                    <h3>Method Pipeline</h3>
+                    <div class="pipeline-diagram">
+                        <img src="pipeline_v3.jpeg" alt="STARFlow-V Pipeline">
+                        <p style="margin-top: 20px; color: #B0B0B0; font-size: 0.95rem; line-height: 1.6;">
+                            <strong>Figure:</strong> STARFlow-V pipeline. The model processes text prompts and noise through a
+                            <strong>Deep Autoregressive Block</strong> (global temporal reasoning) to produce intermediate latents,
+                            which are then refined by <strong>Shallow Flow Blocks</strong> (local within-frame details).
+                            A <strong>Learnable Causal Denoiser</strong> (trained via Flow-Score Matching) cleans the output.
+                            The model is trained end-to-end with two objectives: Maximum Likelihood for the flow and
+                            Flow-Score Matching for the denoiser.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="overview-section">
+                    <h3>Key Contributions</h3>
+                    <div class="contributions-grid">
+                        <div class="contribution-card">
+                            <div class="contribution-number">1</div>
+                            <h4>Global-Local Architecture for Causal Video Modeling</h4>
+                            <p>
+                                A novel two-level architecture that separates global temporal reasoning from local within-frame details.
+                                A <strong>deep causal Transformer block</strong> processes the video autoregressively in compressed latent space
+                                to capture long-range spatiotemporal dependencies, while <strong>shallow flow blocks</strong> operate independently
+                                on each frame to model rich local structures. This design mitigates compounding errors common in pixel-space
+                                autoregressive models.
+                            </p>
+                        </div>
+
+                        <div class="contribution-card">
+                            <div class="contribution-number">2</div>
+                            <h4>Flow-Score Matching Denoising</h4>
+                            <p>
+                                A unified training framework that combines normalizing flow maximum likelihood with flow-score matching
+                                for denoising. Instead of using imperfect or non-causal denoisers, we train a lightweight <strong>causal
+                                neural denoiser</strong> alongside the main flow model. This denoiser learns to predict the score (gradient
+                                of log-probability) of the model's own distribution, enabling high-quality single-step refinement while
+                                preserving causality.
+                            </p>
+                        </div>
+
+                        <div class="contribution-card">
+                            <div class="contribution-number">3</div>
+                            <h4>Video-Aware Jacobi Iteration</h4>
+                            <p>
+                                Generation (flow inversion) is recast as solving a nonlinear system, enabling <strong>block-wise
+                                parallel updates</strong> of multiple latents simultaneously instead of one-by-one generation.
+                                Combined with <strong>video-aware initialization</strong> that uses temporal information from adjacent
+                                frames and <strong>pipelined execution</strong> between deep and shallow blocks, this achieves significant
+                                speedup while maintaining generation quality.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="overview-section">
+                    <h3>Model Details</h3>
+                    <p style="line-height: 1.8;">
+                        STARFlow-V is trained on <strong>70M text-video pairs</strong> and <strong>400M text-image pairs</strong>,
+                        with a final <strong>7B parameter</strong> model that can generate <strong>480p video at 16fps</strong>.
+                        The model operates in a compressed latent space and leverages the invertible nature of normalizing flows
+                        to natively support multiple generation tasks without any architectural changes or retraining.
+                    </p>
+                    <!-- <p style="line-height: 1.8; margin-top: 15px;">
+                        On the <strong>VBench benchmark</strong>, STARFlow-V achieves performance comparable to recent autoregressive
+                        diffusion models, significantly closing the quality gap between normalizing flows and diffusion models for
+                        video generation. The model demonstrates superior temporal consistency, especially in long-horizon generation
+                        (up to 30 seconds), where competing autoregressive models often exhibit blurring, color drift, or content collapse.
+                    </p> -->
+                </div>
+
+                <div class="overview-section">
+                    <h3>Explore the Results</h3>
+                    <p>
+                        Navigate through the tabs above to see our model's capabilities across different generation tasks.
+                        Each category demonstrates specific aspects of STARFlow-V, from standard text-to-video generation
+                        to long-form video creation and comparisons with diffusion-based baselines.
+                    </p>
+                </div>
+
+                <div class="overview-section">
+                    <h3>BibTeX</h3>
+                    <p style="margin-bottom: 20px;">If you find STARFlow-V useful in your research, please consider citing our work:</p>
+                    <div style="background: #1C1C1E; border-radius: 8px; padding: 20px; border: 1px solid #38383A; position: relative;">
+                        <button onclick="copyBibtex()" style="position: absolute; top: 15px; right: 15px; padding: 6px 12px; background: #007AFF; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.85rem; font-weight: 500;">Copy</button>
+                        <pre id="bibtex-code" style="margin: 0; color: #E0E0E0; font-family: 'Courier New', monospace; font-size: 0.9rem; line-height: 1.6; overflow-x: auto; padding-right: 80px;">@article{gu2025starflowv,
+  title={STARFlow-V: End-to-End Video Generative Modeling with Scalable Normalizing Flows},
+  author={Gu, Jiatao and Shen, Ying and Chen, Tianrong and Dinh, Laurent and Wang, Yuyang and Bautista, Miguel \'Angel and Berthelot, David and Susskind, Josh and Zhai, Shuangfei},
+  journal={arXiv preprint arXiv:XXXX.XXXXX},
+  year={2025}
+}</pre>
+                    </div>
+                </div>
+            </section>
+
+            <section id="text-to-video" class="tab-content">
+
+                <h2>Text-to-Video Generation</h2>
+                <p>Our model generates high-quality videos directly from text descriptions.</p>
+
+                <div class="video-grid">
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/a_border_collie_balancing_on.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a border collie balancing on a fallen log over a shallow stream; locked-off shot with gentle world motion; natural lighting"</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/a_campfire_crackling_with_embers.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a campfire crackling with embers lifting; static shot; night warmth, ultra-realistic, 4K 2"</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/a_cassowary_stepping_through_rainforest.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a cassowary stepping through rainforest shade; locked-off telephoto with soft bokeh; golden-hour warmth, ultra-realistic, 4K."</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/a_chameleon_rolling_its_eyes.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a chameleon rolling its eyes in different directions; handheld with minimal sway; overcast soft light, ultra-realistic, 4K; soft"</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/a_chef_tossing_vegetables_in.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a chef tossing vegetables in a pan; medium shot; stovetop glow, ultra-realistic, 4K."</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/a_chipmunk_stuffing_seeds_into.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a chipmunk stuffing seeds into full cheeks; locked-off shot with gentle world motion; blue-hour ambience, ultra-realistic, 4K; l"</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/a_colorful_nebula_drifting_with.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a colorful nebula drifting with subtle motion; locked-off shot with gentle world motion; natural lighting, ultra-realistic, 4K;"</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/a_corgi_wearing_neonpink_sunglasses.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a corgi wearing neon-pink sunglasses on a sunlit pier; drone orbit with steady altitude hold; light film grain for realism; gold"</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/a_giant_panda_nibbling_a.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a giant panda nibbling a bamboo shoot; cinematic handheld at eye level; natural lighting, ultra-realistic, 4K."</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/a_heron_stepping_carefully_in.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a heron stepping carefully in marsh shallows; handheld with minimal sway; overcast soft light, ultra-realistic, 4K; soft depth o"</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/a_humanoid_robot_practicing_slow.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a humanoid robot practicing slow tai chi in a plaza; handheld with minimal sway; blue-hour ambience, ultra-realistic, 4K; occasi"</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/a_kettle_venting_steam_on.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a kettle venting steam on a stove; static composition with foreground elements drifting; light film grain for realism; window li"</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/a_penguin_waddling_across_wet.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a penguin waddling across wet rocks; gentle push-in from a stable tripod; overcast soft light, ultra-realistic, 4K; soft depth o"</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/a_potter_shaping_clay_on.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a potter shaping clay on a spinning wheel; low-angle tilt up revealing the scene; occasional lens flare at frame edge; clean stu"</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/a_puffin_turning_its_head.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a puffin turning its head with a beak full of fish; gentle push-in from a stable tripod; natural lighting, ultra-realistic, 4K;"</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/a_rooftop_garden_swaying_in.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a rooftop garden swaying in wind; smooth dolly-in along ground-level sliders; soft depth of field and creamy bokeh; candlelit gl"</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/a_sailboat_drifting_on_calm.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a sailboat drifting on calm water; wide shot; hazy sunlight, ultra-realistic, 4K."</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/a_sheep_flock_drifting_across.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a sheep flock drifting across a grassy hillside; locked-off shot with gentle world motion; golden-hour warmth, ultra-realistic,"</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/a_skier_floating_through_fresh.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a skier floating through fresh powder; slow gimbal push-in with subtle handheld micro-shake; light film grain for realism; misty"</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/a_small_service_robot_trundling.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a small service robot trundling down a neon alley; handheld with minimal sway; blue-hour ambience, ultra-realistic, 4K; natural"</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/a_snail_extending_its_eyestalks.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a snail extending its eyestalks after a light mist; gentle push-in from a stable tripod; blue-hour ambience, ultra-realistic, 4K"</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/a_starfish_gripping_a_tidepool.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a starfish gripping a tidepool rock as water swirls; gentle push-in from a stable tripod; natural lighting, ultra-realistic, 4K;"</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/a_tram_sliding_past_in.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a tram sliding past in light rain; handheld follow with natural breathing sway; a faint fingerprint smudge catching light; harsh"</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/a_zebra_flicking_its_tail.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a zebra flicking its tail in warm savanna light; slow pan across the scene; golden-hour warmth, ultra-realistic, 4K; light film"</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/aerial_shot_flying_low_over.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"aerial shot flying low over rolling sand dunes patterned by the wind."</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/an_ostrich_scanning_an_open.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"an ostrich scanning an open plain; slow gimbal push-in; overcast soft light; ultra-realistic, 4K."</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/carbonation_rising_in_a_glass.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"carbonation rising in a glass of seltzer; shallow parallax orbit at chest height; tiny focus breathing during rack focus; golden"</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/cherry_blossoms_falling_along_a.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"cherry blossoms falling along a riverside path; locked-off shot with gentle world motion; natural lighting, ultra-realistic, 4K;"</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/closeup_shot_of_a_wind.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"close-up shot of a wind chime gently moving and ringing in a light breeze."</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/drone_shot_flying_low_over.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"drone shot flying low over a lavender field with rows converging to the horizon."</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/forward_dolly_shot_through_a.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>" forward dolly shot through a narrow alley full of hanging lanterns and street food stalls."</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/lavender_swaying_with_bees_passing.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"lavender swaying with bees passing through; gentle push-in from a stable tripod; overcast soft light, ultra-realistic, 4K; soft"</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/macro_shot_of_a_ladybug.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>" macro shot of a ladybug crawling along the edge of a green leaf."</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/macro_shot_of_ink_swirling.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>" macro shot of ink swirling and mixing in a glass of water against a white background."</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/macro_shot_of_raindrops_rippling.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>" macro shot of raindrops rippling on a calm pond with concentric circles overlapping."</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/paper_lanterns_bobbing_in_a.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"paper lanterns bobbing in a night festival; over-the-shoulder follow maintaining subject center; soft depth of field and creamy"</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/shot_of_a_drone_circling.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>" shot of a drone circling a small island surrounded by clear blue water."</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/shot_of_a_drone_flying.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>" shot of a drone flying over a patch of colorful autumn forest."</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/shot_of_a_snow_globe.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>" shot of a snow globe being shaken, flakes swirling around a tiny village."</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/steam_rising_from_a_cup.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"steam rising from a cup of tea by a window; locked-off shot; soft morning light, ultra-realistic, 4K. 2"</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/timelapse_of_stars_streaking_across.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>" timelapse of stars streaking across the night sky above a desert landscape."</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/underwater_shot_of_koi_fish.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>" underwater shot of koi fish gliding past colorful pebbles in a clear pond."</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/wide_shot_of_waves_crashing.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>" wide shot of waves crashing dramatically against black volcanic rocks at the coast."</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/text-to-video/wisteria_clusters_swinging_under_a.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"wisteria clusters swinging under a pergola; locked-off shot with gentle world motion; natural lighting, ultra-realistic, 4K; lig"</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="image-to-video" class="tab-content">
+                <h2>Image-to-Video Generation</h2>
+                <p>Generate videos from input images while maintaining temporal consistency. Due to the autoregressive nature of our model, we don't need to change the architecture at all—one model handles all tasks seamlessly.</p>
+
+                <div class="video-grid">
+                    <div class="video-item image-to-video-item">
+                        <div class="side-by-side">
+                            <div class="input-frame">
+                                <img src="videos/image-to-video/001.png" alt="Input image">
+                                <p class="label">Input Image</p>
+                            </div>
+                            <div class="output-video">
+                                <video autoplay muted loop playsinline controls>
+                                    <source src="videos/image-to-video/001.mp4" type="video/mp4">
+                                </video>
+                                <p class="label">Generated Video</p>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item image-to-video-item">
+                        <div class="side-by-side">
+                            <div class="input-frame">
+                                <img src="videos/image-to-video/002.png" alt="Input image">
+                                <p class="label">Input Image</p>
+                            </div>
+                            <div class="output-video">
+                                <video autoplay muted loop playsinline controls>
+                                    <source src="videos/image-to-video/002.mp4" type="video/mp4">
+                                </video>
+                                <p class="label">Generated Video</p>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item image-to-video-item">
+                        <div class="side-by-side">
+                            <div class="input-frame">
+                                <img src="videos/image-to-video/003.png" alt="Input image">
+                                <p class="label">Input Image</p>
+                            </div>
+                            <div class="output-video">
+                                <video autoplay muted loop playsinline controls>
+                                    <source src="videos/image-to-video/003.mp4" type="video/mp4">
+                                </video>
+                                <p class="label">Generated Video</p>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item image-to-video-item">
+                        <div class="side-by-side">
+                            <div class="input-frame">
+                                <img src="videos/image-to-video/004.png" alt="Input image">
+                                <p class="label">Input Image</p>
+                            </div>
+                            <div class="output-video">
+                                <video autoplay muted loop playsinline controls>
+                                    <source src="videos/image-to-video/004.mp4" type="video/mp4">
+                                </video>
+                                <p class="label">Generated Video</p>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item image-to-video-item">
+                        <div class="side-by-side">
+                            <div class="input-frame">
+                                <img src="videos/image-to-video/005.png" alt="Input image">
+                                <p class="label">Input Image</p>
+                            </div>
+                            <div class="output-video">
+                                <video autoplay muted loop playsinline controls>
+                                    <source src="videos/image-to-video/005.mp4" type="video/mp4">
+                                </video>
+                                <p class="label">Generated Video</p>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item image-to-video-item">
+                        <div class="side-by-side">
+                            <div class="input-frame">
+                                <img src="videos/image-to-video/006.png" alt="Input image">
+                                <p class="label">Input Image</p>
+                            </div>
+                            <div class="output-video">
+                                <video autoplay muted loop playsinline controls>
+                                    <source src="videos/image-to-video/006.mp4" type="video/mp4">
+                                </video>
+                                <p class="label">Generated Video</p>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item image-to-video-item">
+                        <div class="side-by-side">
+                            <div class="input-frame">
+                                <img src="videos/image-to-video/007.png" alt="Input image">
+                                <p class="label">Input Image</p>
+                            </div>
+                            <div class="output-video">
+                                <video autoplay muted loop playsinline controls>
+                                    <source src="videos/image-to-video/007.mp4" type="video/mp4">
+                                </video>
+                                <p class="label">Generated Video</p>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item image-to-video-item">
+                        <div class="side-by-side">
+                            <div class="input-frame">
+                                <img src="videos/image-to-video/008.png" alt="Input image">
+                                <p class="label">Input Image</p>
+                            </div>
+                            <div class="output-video">
+                                <video autoplay muted loop playsinline controls>
+                                    <source src="videos/image-to-video/008.mp4" type="video/mp4">
+                                </video>
+                                <p class="label">Generated Video</p>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item image-to-video-item">
+                        <div class="side-by-side">
+                            <div class="input-frame">
+                                <img src="videos/image-to-video/009.png" alt="Input image">
+                                <p class="label">Input Image</p>
+                            </div>
+                            <div class="output-video">
+                                <video autoplay muted loop playsinline controls>
+                                    <source src="videos/image-to-video/009.mp4" type="video/mp4">
+                                </video>
+                                <p class="label">Generated Video</p>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item image-to-video-item">
+                        <div class="side-by-side">
+                            <div class="input-frame">
+                                <img src="videos/image-to-video/010.png" alt="Input image">
+                                <p class="label">Input Image</p>
+                            </div>
+                            <div class="output-video">
+                                <video autoplay muted loop playsinline controls>
+                                    <source src="videos/image-to-video/010.mp4" type="video/mp4">
+                                </video>
+                                <p class="label">Generated Video</p>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item image-to-video-item">
+                        <div class="side-by-side">
+                            <div class="input-frame">
+                                <img src="videos/image-to-video/011.png" alt="Input image">
+                                <p class="label">Input Image</p>
+                            </div>
+                            <div class="output-video">
+                                <video autoplay muted loop playsinline controls>
+                                    <source src="videos/image-to-video/011.mp4" type="video/mp4">
+                                </video>
+                                <p class="label">Generated Video</p>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item image-to-video-item">
+                        <div class="side-by-side">
+                            <div class="input-frame">
+                                <img src="videos/image-to-video/012.png" alt="Input image">
+                                <p class="label">Input Image</p>
+                            </div>
+                            <div class="output-video">
+                                <video autoplay muted loop playsinline controls>
+                                    <source src="videos/image-to-video/012.mp4" type="video/mp4">
+                                </video>
+                                <p class="label">Generated Video</p>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item image-to-video-item">
+                        <div class="side-by-side">
+                            <div class="input-frame">
+                                <img src="videos/image-to-video/013.png" alt="Input image">
+                                <p class="label">Input Image</p>
+                            </div>
+                            <div class="output-video">
+                                <video autoplay muted loop playsinline controls>
+                                    <source src="videos/image-to-video/013.mp4" type="video/mp4">
+                                </video>
+                                <p class="label">Generated Video</p>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item image-to-video-item">
+                        <div class="side-by-side">
+                            <div class="input-frame">
+                                <img src="videos/image-to-video/014.png" alt="Input image">
+                                <p class="label">Input Image</p>
+                            </div>
+                            <div class="output-video">
+                                <video autoplay muted loop playsinline controls>
+                                    <source src="videos/image-to-video/014.mp4" type="video/mp4">
+                                </video>
+                                <p class="label">Generated Video</p>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item image-to-video-item">
+                        <div class="side-by-side">
+                            <div class="input-frame">
+                                <img src="videos/image-to-video/015.png" alt="Input image">
+                                <p class="label">Input Image</p>
+                            </div>
+                            <div class="output-video">
+                                <video autoplay muted loop playsinline controls>
+                                    <source src="videos/image-to-video/015.mp4" type="video/mp4">
+                                </video>
+                                <p class="label">Generated Video</p>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item image-to-video-item">
+                        <div class="side-by-side">
+                            <div class="input-frame">
+                                <img src="videos/image-to-video/016.png" alt="Input image">
+                                <p class="label">Input Image</p>
+                            </div>
+                            <div class="output-video">
+                                <video autoplay muted loop playsinline controls>
+                                    <source src="videos/image-to-video/016.mp4" type="video/mp4">
+                                </video>
+                                <p class="label">Generated Video</p>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item image-to-video-item">
+                        <div class="side-by-side">
+                            <div class="input-frame">
+                                <img src="videos/image-to-video/017.png" alt="Input image">
+                                <p class="label">Input Image</p>
+                            </div>
+                            <div class="output-video">
+                                <video autoplay muted loop playsinline controls>
+                                    <source src="videos/image-to-video/017.mp4" type="video/mp4">
+                                </video>
+                                <p class="label">Generated Video</p>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item image-to-video-item">
+                        <div class="side-by-side">
+                            <div class="input-frame">
+                                <img src="videos/image-to-video/018.png" alt="Input image">
+                                <p class="label">Input Image</p>
+                            </div>
+                            <div class="output-video">
+                                <video autoplay muted loop playsinline controls>
+                                    <source src="videos/image-to-video/018.mp4" type="video/mp4">
+                                </video>
+                                <p class="label">Generated Video</p>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item image-to-video-item">
+                        <div class="side-by-side">
+                            <div class="input-frame">
+                                <img src="videos/image-to-video/019.png" alt="Input image">
+                                <p class="label">Input Image</p>
+                            </div>
+                            <div class="output-video">
+                                <video autoplay muted loop playsinline controls>
+                                    <source src="videos/image-to-video/019.mp4" type="video/mp4">
+                                </video>
+                                <p class="label">Generated Video</p>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item image-to-video-item">
+                        <div class="side-by-side">
+                            <div class="input-frame">
+                                <img src="videos/image-to-video/020.png" alt="Input image">
+                                <p class="label">Input Image</p>
+                            </div>
+                            <div class="output-video">
+                                <video autoplay muted loop playsinline controls>
+                                    <source src="videos/image-to-video/020.mp4" type="video/mp4">
+                                </video>
+                                <p class="label">Generated Video</p>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item image-to-video-item">
+                        <div class="side-by-side">
+                            <div class="input-frame">
+                                <img src="videos/image-to-video/021.png" alt="Input image">
+                                <p class="label">Input Image</p>
+                            </div>
+                            <div class="output-video">
+                                <video autoplay muted loop playsinline controls>
+                                    <source src="videos/image-to-video/021.mp4" type="video/mp4">
+                                </video>
+                                <p class="label">Generated Video</p>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item image-to-video-item">
+                        <div class="side-by-side">
+                            <div class="input-frame">
+                                <img src="videos/image-to-video/022.png" alt="Input image">
+                                <p class="label">Input Image</p>
+                            </div>
+                            <div class="output-video">
+                                <video autoplay muted loop playsinline controls>
+                                    <source src="videos/image-to-video/022.mp4" type="video/mp4">
+                                </video>
+                                <p class="label">Generated Video</p>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item image-to-video-item">
+                        <div class="side-by-side">
+                            <div class="input-frame">
+                                <img src="videos/image-to-video/023.png" alt="Input image">
+                                <p class="label">Input Image</p>
+                            </div>
+                            <div class="output-video">
+                                <video autoplay muted loop playsinline controls>
+                                    <source src="videos/image-to-video/023.mp4" type="video/mp4">
+                                </video>
+                                <p class="label">Generated Video</p>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item image-to-video-item">
+                        <div class="side-by-side">
+                            <div class="input-frame">
+                                <img src="videos/image-to-video/024.png" alt="Input image">
+                                <p class="label">Input Image</p>
+                            </div>
+                            <div class="output-video">
+                                <video autoplay muted loop playsinline controls>
+                                    <source src="videos/image-to-video/024.mp4" type="video/mp4">
+                                </video>
+                                <p class="label">Generated Video</p>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="video-to-video" class="tab-content">
+                <h2>Video-to-Video Generation</h2>
+                <p>Our model can extend and transform existing videos while maintaining temporal consistency. Due to the autoregressive nature of our model, we don't need to change the architecture at all—one model handles all tasks seamlessly.</p>
+
+                <div class="video-grid">
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/video-to-video/002.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>Add_hand</h3>
+                            <p class="video-details">384p • 16fps • 2s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/video-to-video/003.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>Add_horse</h3>
+                            <p class="video-details">384p • 16fps • 2s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/video-to-video/004.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>Convert_orange_into_lemon</h3>
+                            <p class="video-details">384p • 16fps • 2s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/video-to-video/012.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>Turn_blackberries_into_red_currant</h3>
+                            <p class="video-details">384p • 16fps • 2s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/video-to-video/001.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>Detect_sheep</h3>
+                            <p class="video-details">384p • 16fps • 2s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/video-to-video/005.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>Detect_book</h3>
+                            <p class="video-details">384p • 16fps • 2s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/video-to-video/006.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>Detect_depth</h3>
+                            <p class="video-details">384p • 16fps • 2s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/video-to-video/007.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>Detect_hand</h3>
+                            <p class="video-details">384p • 16fps • 2s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/video-to-video/008.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>Detect_magnolia_tree</h3>
+                            <p class="video-details">384p • 16fps • 2s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/video-to-video/009.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>Inpaint</h3>
+                            <p class="video-details">384p • 16fps • 2s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/video-to-video/010.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>Inpaint</h3>
+                            <p class="video-details">384p • 16fps • 2s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/video-to-video/011.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>Inpaint</h3>
+                            <p class="video-details">384p • 16fps • 2s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/video-to-video/014.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>Make_flowers_Electric_Blue</h3>
+                            <p class="video-details">384p • 16fps • 2s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/video-to-video/015.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>Make_it_abstract_Bauhaus_style</h3>
+                            <p class="video-details">384p • 16fps • 2s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/video-to-video/016.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>Make_it_concept_art_style</h3>
+                            <p class="video-details">384p • 16fps • 2s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/video-to-video/017.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>Make_it_doodle_style</h3>
+                            <p class="video-details">384p • 16fps • 2s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/video-to-video/018.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>Make_it_gothic_gloomy</h3>
+                            <p class="video-details">384p • 16fps • 2s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/video-to-video/019.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>Make_it_traditional_Chinese_ink_painting_style</h3>
+                            <p class="video-details">384p • 16fps • 2s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/video-to-video/020.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>Make_the_beach_golden_sandy</h3>
+                            <p class="video-details">384p • 16fps • 2s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/video-to-video/021.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>Make_the_jellyfish_maroon_color</h3>
+                            <p class="video-details">384p • 16fps • 2s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/video-to-video/022.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>Make_the_train_metallic_silver_and_rusty</h3>
+                            <p class="video-details">384p • 16fps • 2s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/video-to-video/023.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>Make_the_vase_golden</h3>
+                            <p class="video-details">384p • 16fps • 2s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/video-to-video/024.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>Outpaint</h3>
+                            <p class="video-details">384p • 16fps • 2s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/video-to-video/025.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>Outpaint.</h3>
+                            <p class="video-details">384p • 16fps • 2s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/video-to-video/026.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>Outpaint.</h3>
+                            <p class="video-details">384p • 16fps • 2s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/video-to-video/027.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>Outpaint.</h3>
+                            <p class="video-details">384p • 16fps • 2s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/video-to-video/028.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>Outpaint.</h3>
+                            <p class="video-details">384p • 16fps • 2s</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="longer-generation" class="tab-content">
+                <h2>Long Video Generation</h2>
+                <p>Extended video generation (10s, 15s, 30s) using autoregressive segment-by-segment generation. The tail of each 5s segment is re-encoded as the prefix for the next segment, leveraging the invertibility of normalizing flows.</p>
+
+                <div class="video-grid">
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/longer-generation/a_black_ink_drop_blooming.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a black ink drop blooming through clear water in a tumbler; static macro with minimal parallax; tendrils feathering out in slow"</h3>
+                            <p class="video-details">480p • 16fps • 10s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/longer-generation/a_corgi_dog_wearing_a.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a corgi dog wearing a tie sat by a window"</h3>
+                            <p class="video-details">480p • 16fps • 10s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/longer-generation/a_corgi_dozing_in_a.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a corgi dozing in a sunbeam on hardwood floor; slow dolly-in at ankle height; dust motes drifting in the light shaft, shallow de"</h3>
+                            <p class="video-details">480p • 16fps • 10s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/longer-generation/a_corgi_sticking_its_head.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a corgi sticking its head out of a car window; tracking from mirror level, horizon bob from suspension; fur whipping in the wind"</h3>
+                            <p class="video-details">480p • 16fps • 10s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/longer-generation/a_dim_street_lit_only.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a dim street lit only by vending machines; slow dolly-forward at waist height; saturated glow halos, tiny insects swarming in li"</h3>
+                            <p class="video-details">480p • 16fps • 10s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/longer-generation/a_street_waffle_being_dusted.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a street waffle being dusted with powdered sugar; tight close-up from plate level; sugar creating tiny puffs on impact, some gra"</h3>
+                            <p class="video-details">480p • 16fps • 10s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/longer-generation/fall_leaves_spiraling_down_in.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"fall leaves spiraling down in a courtyard; upward-looking locked-off shot; branches framing sky, occasional leaf grazing lens; l"</h3>
+                            <p class="video-details">480p • 16fps • 10s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/longer-generation/school_of_koi_swirling_just.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"school of koi swirling just below pond surface; top-down gimbal drift; occasional surface glare flare, ripples distorting bodies"</h3>
+                            <p class="video-details">480p • 16fps • 10s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/longer-generation/subway_doors_closing_on_a.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"subway doors closing on a busy platform; low-angle from floor level; rolling shutter wobble as train accelerates, reflections sl"</h3>
+                            <p class="video-details">480p • 16fps • 10s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/longer-generation/zoomin_corgi_face.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"zoom-in corgi face"</h3>
+                            <p class="video-details">480p • 16fps • 13s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/longer-generation/a_corgi_dog_sits_in.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a corgi dog sits in front of a blackboard teaching"</h3>
+                            <p class="video-details">480p • 16fps • 15s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/longer-generation/a_corgi_dog_wearing_a_2.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a corgi dog wearing a tie sitting in front of a blackboard"</h3>
+                            <p class="video-details">480p • 16fps • 15s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/longer-generation/a_golden_doodle_tilting_its.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a golden doodle tilting its head at a squeaky toy"</h3>
+                            <p class="video-details">480p • 16fps • 30s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/longer-generation/paper_lanterns_bobbing_in_a.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"paper lanterns bobbing in a night festival; over-the-shoulder follow maintaining subject center; soft depth of field and creamy"</h3>
+                            <p class="video-details">480p • 16fps • 30s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/longer-generation/pov_from_the_boat_deck.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"POV from the boat deck looking at a corgi wearing neon-pink sunglasses; wind noise feel, slight horizon bob, water droplets on l"</h3>
+                            <p class="video-details">480p • 16fps • 30s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/longer-generation/this_closeup_shot_of_a.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"This close-up shot of a Victoria crowned pigeon"</h3>
+                            <p class="video-details">480p • 16fps • 30s</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="comparisons" class="tab-content">
+                <h2>Method Comparisons</h2>
+                <p>Side-by-side comparisons with baseline Autoregressive diffusion models. All prompts are sampled from VBench (Huang, 2023). Each video shows three methods from left to right: NOVA (https://github.com/baaivision/NOVA), WAN-Causal (finetuned from WAN provided by https://huggingface.co/gdhe17/Self-Forcing/blob/main/checkpoints/ode_init.pt), and STARFlow-V (Ours).</p>
+
+                <div class="video-grid">
+                    <div class="video-item comparison-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/comparisons/001.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <div class="comparison-labels">
+                                <span class="method-label">NOVA<br>(top)</span>
+                                <span class="method-label">WAN-Causal<br>(mid)</span>
+                                <span class="method-label">STARFlow-V<br>(bot)</span>
+                            </div>
+                            <h3>"A panda drinking coffee in a cafe in Paris, in cyberpunk style"</h3>
+                            <p class="video-details">480p • 16fps • 7s</p>
+                        </div>
+                    </div>
+                    <div class="video-item comparison-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/comparisons/002.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <div class="comparison-labels">
+                                <span class="method-label">NOVA<br>(top)</span>
+                                <span class="method-label">WAN-Causal<br>(mid)</span>
+                                <span class="method-label">STARFlow-V<br>(bot)</span>
+                            </div>
+                            <h3>"A person is playing piano"</h3>
+                            <p class="video-details">480p • 16fps • 7s</p>
+                        </div>
+                    </div>
+                    <div class="video-item comparison-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/comparisons/003.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <div class="comparison-labels">
+                                <span class="method-label">NOVA<br>(top)</span>
+                                <span class="method-label">WAN-Causal<br>(mid)</span>
+                                <span class="method-label">STARFlow-V<br>(bot)</span>
+                            </div>
+                            <h3>"A person is tasting beer"</h3>
+                            <p class="video-details">480p • 16fps • 7s</p>
+                        </div>
+                    </div>
+                    <div class="video-item comparison-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/comparisons/004.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <div class="comparison-labels">
+                                <span class="method-label">NOVA<br>(top)</span>
+                                <span class="method-label">WAN-Causal<br>(mid)</span>
+                                <span class="method-label">STARFlow-V<br>(bot)</span>
+                            </div>
+                            <h3>"a backpack and an umbrella"</h3>
+                            <p class="video-details">480p • 16fps • 7s</p>
+                        </div>
+                    </div>
+                    <div class="video-item comparison-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/comparisons/005.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <div class="comparison-labels">
+                                <span class="method-label">NOVA<br>(top)</span>
+                                <span class="method-label">WAN-Causal<br>(mid)</span>
+                                <span class="method-label">STARFlow-V<br>(bot)</span>
+                            </div>
+                            <h3>"A 3D model of a 1800s victorian house."</h3>
+                            <p class="video-details">480p • 16fps • 7s</p>
+                        </div>
+                    </div>
+                    <div class="video-item comparison-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/comparisons/006.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <div class="comparison-labels">
+                                <span class="method-label">NOVA<br>(top)</span>
+                                <span class="method-label">WAN-Causal<br>(mid)</span>
+                                <span class="method-label">STARFlow-V<br>(bot)</span>
+                            </div>
+                            <h3>"A corgi&#x27;s head depicted as an explosion of a nebula"</h3>
+                            <p class="video-details">480p • 16fps • 4s</p>
+                        </div>
+                    </div>
+                    <div class="video-item comparison-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/comparisons/007.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <div class="comparison-labels">
+                                <span class="method-label">NOVA<br>(top)</span>
+                                <span class="method-label">WAN-Causal<br>(mid)</span>
+                                <span class="method-label">STARFlow-V<br>(bot)</span>
+                            </div>
+                            <h3>"A cute happy Corgi playing in park, sunset"</h3>
+                            <p class="video-details">480p • 16fps • 7s</p>
+                        </div>
+                    </div>
+                    <div class="video-item comparison-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/comparisons/008.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <div class="comparison-labels">
+                                <span class="method-label">NOVA<br>(top)</span>
+                                <span class="method-label">WAN-Causal<br>(mid)</span>
+                                <span class="method-label">STARFlow-V<br>(bot)</span>
+                            </div>
+                            <h3>"A shark swimming in clear Caribbean ocean"</h3>
+                            <p class="video-details">480p • 16fps • 7s</p>
+                        </div>
+                    </div>
+                    <div class="video-item comparison-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/comparisons/009.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <div class="comparison-labels">
+                                <span class="method-label">NOVA<br>(top)</span>
+                                <span class="method-label">WAN-Causal<br>(mid)</span>
+                                <span class="method-label">STARFlow-V<br>(bot)</span>
+                            </div>
+                            <h3>"a bird"</h3>
+                            <p class="video-details">480p • 16fps • 7s</p>
+                        </div>
+                    </div>
+                    <div class="video-item comparison-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/comparisons/010.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <div class="comparison-labels">
+                                <span class="method-label">NOVA<br>(top)</span>
+                                <span class="method-label">WAN-Causal<br>(mid)</span>
+                                <span class="method-label">STARFlow-V<br>(bot)</span>
+                            </div>
+                            <h3>"a drone flying over a snowy forest."</h3>
+                            <p class="video-details">480p • 16fps • 6s</p>
+                        </div>
+                    </div>
+                    <div class="video-item comparison-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/comparisons/011.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <div class="comparison-labels">
+                                <span class="method-label">NOVA<br>(top)</span>
+                                <span class="method-label">WAN-Causal<br>(mid)</span>
+                                <span class="method-label">STARFlow-V<br>(bot)</span>
+                            </div>
+                            <h3>"arch"</h3>
+                            <p class="video-details">480p • 16fps • 7s</p>
+                        </div>
+                    </div>
+                    <div class="video-item comparison-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/comparisons/012.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <div class="comparison-labels">
+                                <span class="method-label">NOVA<br>(top)</span>
+                                <span class="method-label">WAN-Causal<br>(mid)</span>
+                                <span class="method-label">STARFlow-V<br>(bot)</span>
+                            </div>
+                            <h3>"cliff"</h3>
+                            <p class="video-details">480p • 16fps • 7s</p>
+                        </div>
+                    </div>
+                    <div class="video-item comparison-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/comparisons/013.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <div class="comparison-labels">
+                                <span class="method-label">NOVA<br>(top)</span>
+                                <span class="method-label">WAN-Causal<br>(mid)</span>
+                                <span class="method-label">STARFlow-V<br>(bot)</span>
+                            </div>
+                            <h3>"a person drinking coffee in a cafe"</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item comparison-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/comparisons/014.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <div class="comparison-labels">
+                                <span class="method-label">NOVA<br>(top)</span>
+                                <span class="method-label">WAN-Causal<br>(mid)</span>
+                                <span class="method-label">STARFlow-V<br>(bot)</span>
+                            </div>
+                            <h3>"In a still frame, a stop sign"</h3>
+                            <p class="video-details">480p • 16fps • 7s</p>
+                        </div>
+                    </div>
+                    <div class="video-item comparison-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/comparisons/015.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <div class="comparison-labels">
+                                <span class="method-label">NOVA<br>(top)</span>
+                                <span class="method-label">WAN-Causal<br>(mid)</span>
+                                <span class="method-label">STARFlow-V<br>(bot)</span>
+                            </div>
+                            <h3>"A boat sailing leisurely along the Seine River with the Eiffel Tower in background, in super slow motion"</h3>
+                            <p class="video-details">480p • 16fps • 3s</p>
+                        </div>
+                    </div>
+                    <div class="video-item comparison-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/comparisons/016.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <div class="comparison-labels">
+                                <span class="method-label">NOVA<br>(top)</span>
+                                <span class="method-label">WAN-Causal<br>(mid)</span>
+                                <span class="method-label">STARFlow-V<br>(bot)</span>
+                            </div>
+                            <h3>"The bund Shanghai, zoom in"</h3>
+                            <p class="video-details">480p • 16fps • 7s</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="failure-cases" class="tab-content">
+                <h2>Failure Cases</h2>
+                <p>Examples where our model struggles or produces suboptimal results, particularly on complex motion and physical interactions. These limitations stem from: (1) insufficient training due to resource constraints, (2) low-quality training data, and (3) the absence of post-training refinement—we perform only pretraining without supervised fine-tuning (SFT) or reinforcement learning (RL).</p>
+
+                <div class="video-grid">
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/failure-cases/a_dog_shaking_off_water.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a dog shaking off water on a dock; handheld with minimal sway; blue-hour ambience, ultra-realistic, 4K; light film grain."</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/failure-cases/a_goat_kid_hopping_onto.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a goat kid hopping onto a small boulder then back down; handheld with minimal sway; blue-hour ambience, ultra-realistic, 4K; nat"</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/failure-cases/a_green_powder_is_being.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"&quot;A green powder is being poured into a test tube"</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/failure-cases/a_hamster_running_steadily_in.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a hamster running steadily in a clear exercise wheel; handheld with minimal sway; golden-hour warmth, ultra-realistic, 4K; light"</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/failure-cases/a_skateboarder_kickflipping_off_a.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a skateboarder kickflipping off a curb; shallow parallax orbit at chest height; slight chromatic aberration at highlights; blue-"</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/failure-cases/a_small_octopus_exploring_a.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a small octopus exploring a jar with one curious arm; gentle push-in from a stable tripod; golden-hour warmth, ultra-realistic,"</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/failure-cases/a_trail_runner_cresting_a.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"a trail runner cresting a ridge at dawn; over-the-shoulder follow maintaining subject center; tiny focus breathing during rack f"</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop playsinline controls>
+                            <source src="videos/failure-cases/fresh_bread_being_sliced_on.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-info">
+                            <h3>"fresh bread being sliced on a wooden board; close-up; kitchen window light, ultra-realistic, 4K."</h3>
+                            <p class="video-details">480p • 16fps • 5s</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+</div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 STARFlow project. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            const backToTopButton = document.getElementById('backToTop');
+
+            function activateTab(tabId) {
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+
+                const targetButton = document.querySelector(`[data-tab="${tabId}"]`);
+                const targetContent = document.getElementById(tabId);
+
+                if (targetButton && targetContent) {
+                    targetButton.classList.add('active');
+                    targetContent.classList.add('active');
+                }
+            }
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetTab = button.getAttribute('data-tab');
+                    activateTab(targetTab);
+                    // Update URL hash without scrolling
+                    history.replaceState(null, null, '#' + targetTab);
+                });
+            });
+
+            // Check URL hash on load and activate corresponding tab
+            const hash = window.location.hash.substring(1);
+            if (hash && document.getElementById(hash)) {
+                activateTab(hash);
+            }
+
+            // Listen for hash changes (e.g., browser back/forward)
+            window.addEventListener('hashchange', function() {
+                const newHash = window.location.hash.substring(1);
+                if (newHash && document.getElementById(newHash)) {
+                    activateTab(newHash);
+                }
+            });
+
+            // Back to top button functionality
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('visible');
+                } else {
+                    backToTopButton.classList.remove('visible');
+                }
+            });
+
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Copy BibTeX to clipboard
+        function copyBibtex() {
+            const bibtexText = document.getElementById('bibtex-code').textContent;
+            navigator.clipboard.writeText(bibtexText).then(function() {
+                // Show success feedback
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.background = '#34C759';
+                setTimeout(function() {
+                    button.textContent = originalText;
+                    button.style.background = '#007AFF';
+                }, 2000);
+            }).catch(function(err) {
+                console.error('Failed to copy: ', err);
+            });
+        }
+
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+
+        // Check for saved theme preference or default to dark mode
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        if (currentTheme === 'light') {
+            document.body.classList.add('light-mode');
+            themeIcon.textContent = '🌙';
+            themeText.textContent = 'Dark';
+        }
+
+        themeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('light-mode');
+
+            if (document.body.classList.contains('light-mode')) {
+                themeIcon.textContent = '🌙';
+                themeText.textContent = 'Dark';
+                localStorage.setItem('theme', 'light');
+            } else {
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Light';
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+    </script>
+</body>
+</html>

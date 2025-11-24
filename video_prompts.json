@@ -1,0 +1,747 @@
+{
+  "text-to-video/a_border_collie_balancing_on.mp4": {
+    "prompt": "a border collie balancing on a fallen log over a shallow stream; locked-off shot with gentle world motion; natural lighting",
+    "original_filename": "a border collie balancing on a fallen log over a shallow stream; locked-off shot with gentle world motion; natural lighting, ult.mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/a_campfire_crackling_with_embers.mp4": {
+    "prompt": "a campfire crackling with embers lifting; static shot; night warmth, ultra-realistic, 4K 2",
+    "original_filename": "a campfire crackling with embers lifting; static shot; night warmth, ultra-realistic, 4K 2.mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/a_cassowary_stepping_through_rainforest.mp4": {
+    "prompt": "a cassowary stepping through rainforest shade; locked-off telephoto with soft bokeh; golden-hour warmth, ultra-realistic, 4K.",
+    "original_filename": "a cassowary stepping through rainforest shade; locked-off telephoto with soft bokeh; golden-hour warmth, ultra-realistic, 4K..mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/a_chameleon_rolling_its_eyes.mp4": {
+    "prompt": "a chameleon rolling its eyes in different directions; handheld with minimal sway; overcast soft light, ultra-realistic, 4K; soft",
+    "original_filename": "a chameleon rolling its eyes in different directions; handheld with minimal sway; overcast soft light, ultra-realistic, 4K; soft.mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/a_chef_tossing_vegetables_in.mp4": {
+    "prompt": "a chef tossing vegetables in a pan; medium shot; stovetop glow, ultra-realistic, 4K.",
+    "original_filename": "a chef tossing vegetables in a pan; medium shot; stovetop glow, ultra-realistic, 4K..mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/a_chipmunk_stuffing_seeds_into.mp4": {
+    "prompt": "a chipmunk stuffing seeds into full cheeks; locked-off shot with gentle world motion; blue-hour ambience, ultra-realistic, 4K; l",
+    "original_filename": "a chipmunk stuffing seeds into full cheeks; locked-off shot with gentle world motion; blue-hour ambience, ultra-realistic, 4K; l.mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/a_colorful_nebula_drifting_with.mp4": {
+    "prompt": "a colorful nebula drifting with subtle motion; locked-off shot with gentle world motion; natural lighting, ultra-realistic, 4K;",
+    "original_filename": "a colorful nebula drifting with subtle motion; locked-off shot with gentle world motion; natural lighting, ultra-realistic, 4K; .mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/a_corgi_wearing_neonpink_sunglasses.mp4": {
+    "prompt": "a corgi wearing neon-pink sunglasses on a sunlit pier; drone orbit with steady altitude hold; light film grain for realism; gold",
+    "original_filename": "a corgi wearing neon-pink sunglasses on a sunlit pier; drone orbit with steady altitude hold; light film grain for realism; gold.mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/a_giant_panda_nibbling_a.mp4": {
+    "prompt": "a giant panda nibbling a bamboo shoot; cinematic handheld at eye level; natural lighting, ultra-realistic, 4K.",
+    "original_filename": "a giant panda nibbling a bamboo shoot; cinematic handheld at eye level; natural lighting, ultra-realistic, 4K..mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/a_heron_stepping_carefully_in.mp4": {
+    "prompt": "a heron stepping carefully in marsh shallows; handheld with minimal sway; overcast soft light, ultra-realistic, 4K; soft depth o",
+    "original_filename": "a heron stepping carefully in marsh shallows; handheld with minimal sway; overcast soft light, ultra-realistic, 4K; soft depth o.mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/a_humanoid_robot_practicing_slow.mp4": {
+    "prompt": "a humanoid robot practicing slow tai chi in a plaza; handheld with minimal sway; blue-hour ambience, ultra-realistic, 4K; occasi",
+    "original_filename": "a humanoid robot practicing slow tai chi in a plaza; handheld with minimal sway; blue-hour ambience, ultra-realistic, 4K; occasi.mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/a_kettle_venting_steam_on.mp4": {
+    "prompt": "a kettle venting steam on a stove; static composition with foreground elements drifting; light film grain for realism; window li",
+    "original_filename": "a kettle venting steam on a stove; static composition with foreground elements drifting; light film grain for realism; window li.mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/a_penguin_waddling_across_wet.mp4": {
+    "prompt": "a penguin waddling across wet rocks; gentle push-in from a stable tripod; overcast soft light, ultra-realistic, 4K; soft depth o",
+    "original_filename": "a penguin waddling across wet rocks; gentle push-in from a stable tripod; overcast soft light, ultra-realistic, 4K; soft depth o.mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/a_potter_shaping_clay_on.mp4": {
+    "prompt": "a potter shaping clay on a spinning wheel; low-angle tilt up revealing the scene; occasional lens flare at frame edge; clean stu",
+    "original_filename": "a potter shaping clay on a spinning wheel; low-angle tilt up revealing the scene; occasional lens flare at frame edge; clean stu.mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/a_puffin_turning_its_head.mp4": {
+    "prompt": "a puffin turning its head with a beak full of fish; gentle push-in from a stable tripod; natural lighting, ultra-realistic, 4K;",
+    "original_filename": "a puffin turning its head with a beak full of fish; gentle push-in from a stable tripod; natural lighting, ultra-realistic, 4K; .mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/a_rooftop_garden_swaying_in.mp4": {
+    "prompt": "a rooftop garden swaying in wind; smooth dolly-in along ground-level sliders; soft depth of field and creamy bokeh; candlelit gl",
+    "original_filename": "a rooftop garden swaying in wind; smooth dolly-in along ground-level sliders; soft depth of field and creamy bokeh; candlelit gl.mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/a_sailboat_drifting_on_calm.mp4": {
+    "prompt": "a sailboat drifting on calm water; wide shot; hazy sunlight, ultra-realistic, 4K.",
+    "original_filename": "a sailboat drifting on calm water; wide shot; hazy sunlight, ultra-realistic, 4K..mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/a_sheep_flock_drifting_across.mp4": {
+    "prompt": "a sheep flock drifting across a grassy hillside; locked-off shot with gentle world motion; golden-hour warmth, ultra-realistic,",
+    "original_filename": "a sheep flock drifting across a grassy hillside; locked-off shot with gentle world motion; golden-hour warmth, ultra-realistic, .mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/a_skier_floating_through_fresh.mp4": {
+    "prompt": "a skier floating through fresh powder; slow gimbal push-in with subtle handheld micro-shake; light film grain for realism; misty",
+    "original_filename": "a skier floating through fresh powder; slow gimbal push-in with subtle handheld micro-shake; light film grain for realism; misty.mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/a_small_service_robot_trundling.mp4": {
+    "prompt": "a small service robot trundling down a neon alley; handheld with minimal sway; blue-hour ambience, ultra-realistic, 4K; natural",
+    "original_filename": "a small service robot trundling down a neon alley; handheld with minimal sway; blue-hour ambience, ultra-realistic, 4K; natural .mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/a_snail_extending_its_eyestalks.mp4": {
+    "prompt": "a snail extending its eyestalks after a light mist; gentle push-in from a stable tripod; blue-hour ambience, ultra-realistic, 4K",
+    "original_filename": "a snail extending its eyestalks after a light mist; gentle push-in from a stable tripod; blue-hour ambience, ultra-realistic, 4K.mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/a_starfish_gripping_a_tidepool.mp4": {
+    "prompt": "a starfish gripping a tidepool rock as water swirls; gentle push-in from a stable tripod; natural lighting, ultra-realistic, 4K;",
+    "original_filename": "a starfish gripping a tidepool rock as water swirls; gentle push-in from a stable tripod; natural lighting, ultra-realistic, 4K;.mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/a_tram_sliding_past_in.mp4": {
+    "prompt": "a tram sliding past in light rain; handheld follow with natural breathing sway; a faint fingerprint smudge catching light; harsh",
+    "original_filename": "a tram sliding past in light rain; handheld follow with natural breathing sway; a faint fingerprint smudge catching light; harsh.mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/a_zebra_flicking_its_tail.mp4": {
+    "prompt": "a zebra flicking its tail in warm savanna light; slow pan across the scene; golden-hour warmth, ultra-realistic, 4K; light film",
+    "original_filename": "a zebra flicking its tail in warm savanna light; slow pan across the scene; golden-hour warmth, ultra-realistic, 4K; light film .mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/an_ostrich_scanning_an_open.mp4": {
+    "prompt": "an ostrich scanning an open plain; slow gimbal push-in; overcast soft light; ultra-realistic, 4K.",
+    "original_filename": "an ostrich scanning an open plain; slow gimbal push-in; overcast soft light; ultra-realistic, 4K..mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/carbonation_rising_in_a_glass.mp4": {
+    "prompt": "carbonation rising in a glass of seltzer; shallow parallax orbit at chest height; tiny focus breathing during rack focus; golden",
+    "original_filename": "carbonation rising in a glass of seltzer; shallow parallax orbit at chest height; tiny focus breathing during rack focus; golden.mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/cherry_blossoms_falling_along_a.mp4": {
+    "prompt": "cherry blossoms falling along a riverside path; locked-off shot with gentle world motion; natural lighting, ultra-realistic, 4K;",
+    "original_filename": "cherry blossoms falling along a riverside path; locked-off shot with gentle world motion; natural lighting, ultra-realistic, 4K;.mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/lavender_swaying_with_bees_passing.mp4": {
+    "prompt": "lavender swaying with bees passing through; gentle push-in from a stable tripod; overcast soft light, ultra-realistic, 4K; soft",
+    "original_filename": "lavender swaying with bees passing through; gentle push-in from a stable tripod; overcast soft light, ultra-realistic, 4K; soft .mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/paper_lanterns_bobbing_in_a.mp4": {
+    "prompt": "paper lanterns bobbing in a night festival; over-the-shoulder follow maintaining subject center; soft depth of field and creamy",
+    "original_filename": "paper lanterns bobbing in a night festival; over-the-shoulder follow maintaining subject center; soft depth of field and creamy .mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/steam_rising_from_a_cup.mp4": {
+    "prompt": "steam rising from a cup of tea by a window; locked-off shot; soft morning light, ultra-realistic, 4K. 2",
+    "original_filename": "steam rising from a cup of tea by a window; locked-off shot; soft morning light, ultra-realistic, 4K. 2.mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/wisteria_clusters_swinging_under_a.mp4": {
+    "prompt": "wisteria clusters swinging under a pergola; locked-off shot with gentle world motion; natural lighting, ultra-realistic, 4K; lig",
+    "original_filename": "wisteria clusters swinging under a pergola; locked-off shot with gentle world motion; natural lighting, ultra-realistic, 4K; lig.mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/forward_dolly_shot_through_a.mp4": {
+    "prompt": " forward dolly shot through a narrow alley full of hanging lanterns and street food stalls.",
+    "original_filename": "A 5-second forward dolly shot through a narrow alley full of hanging lanterns and street food stalls..mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/macro_shot_of_a_ladybug.mp4": {
+    "prompt": " macro shot of a ladybug crawling along the edge of a green leaf.",
+    "original_filename": "A 5-second macro shot of a ladybug crawling along the edge of a green leaf..mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/macro_shot_of_ink_swirling.mp4": {
+    "prompt": " macro shot of ink swirling and mixing in a glass of water against a white background.",
+    "original_filename": "A 5-second macro shot of ink swirling and mixing in a glass of water against a white background..mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/macro_shot_of_raindrops_rippling.mp4": {
+    "prompt": " macro shot of raindrops rippling on a calm pond with concentric circles overlapping.",
+    "original_filename": "A 5-second macro shot of raindrops rippling on a calm pond with concentric circles overlapping..mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/shot_of_a_drone_circling.mp4": {
+    "prompt": " shot of a drone circling a small island surrounded by clear blue water.",
+    "original_filename": "A 5-second shot of a drone circling a small island surrounded by clear blue water..mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/shot_of_a_drone_flying.mp4": {
+    "prompt": " shot of a drone flying over a patch of colorful autumn forest.",
+    "original_filename": "A 5-second shot of a drone flying over a patch of colorful autumn forest..mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/shot_of_a_snow_globe.mp4": {
+    "prompt": " shot of a snow globe being shaken, flakes swirling around a tiny village.",
+    "original_filename": "A 5-second shot of a snow globe being shaken, flakes swirling around a tiny village..mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/timelapse_of_stars_streaking_across.mp4": {
+    "prompt": " timelapse of stars streaking across the night sky above a desert landscape.",
+    "original_filename": "A 5-second timelapse of stars streaking across the night sky above a desert landscape..mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/underwater_shot_of_koi_fish.mp4": {
+    "prompt": " underwater shot of koi fish gliding past colorful pebbles in a clear pond.",
+    "original_filename": "A 5-second underwater shot of koi fish gliding past colorful pebbles in a clear pond..mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/wide_shot_of_waves_crashing.mp4": {
+    "prompt": " wide shot of waves crashing dramatically against black volcanic rocks at the coast.",
+    "original_filename": "A 5-second wide shot of waves crashing dramatically against black volcanic rocks at the coast..mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/aerial_shot_flying_low_over.mp4": {
+    "prompt": "aerial shot flying low over rolling sand dunes patterned by the wind.",
+    "original_filename": "aerial shot flying low over rolling sand dunes patterned by the wind..mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/closeup_shot_of_a_wind.mp4": {
+    "prompt": "close-up shot of a wind chime gently moving and ringing in a light breeze.",
+    "original_filename": "close-up shot of a wind chime gently moving and ringing in a light breeze..mp4",
+    "category": "text-to-video"
+  },
+  "text-to-video/drone_shot_flying_low_over.mp4": {
+    "prompt": "drone shot flying low over a lavender field with rows converging to the horizon.",
+    "original_filename": "drone shot flying low over a lavender field with rows converging to the horizon..mp4",
+    "category": "text-to-video"
+  },
+  "image-to-video/a_closeup_shot_of_a.mp4": {
+    "prompt": "\"A close-up shot of a piece of chocolate cake on a_2e52c948-244c-495a-bc4c-8d492bff9365.jpg_cond_3.50_81x480x848_16fps_seed300_0_r1_c0",
+    "original_filename": "\"A close-up shot of a piece of chocolate cake on a_2e52c948-244c-495a-bc4c-8d492bff9365.jpg_cond_3.50_81x480x848_16fps_seed300_0_r1_c0.mp4",
+    "category": "image-to-video"
+  },
+  "image-to-video/001.mp4": {
+    "prompt": "a_closeup_shot_of_a",
+    "original_filename": "a_closeup_shot_of_a.mp4",
+    "category": "image-to-video"
+  },
+  "image-to-video/002.mp4": {
+    "prompt": "\"A green liquid is being poured from a jug into a _3ca88aed-de8a-4328-ac62-ccab6596fcdc.jpg_cond_3.50_81x480x848_16fps_seed300_0_r1_c0",
+    "original_filename": "\"A green liquid is being poured from a jug into a _3ca88aed-de8a-4328-ac62-ccab6596fcdc.jpg_cond_3.50_81x480x848_16fps_seed300_0_r1_c0.mp4",
+    "category": "image-to-video"
+  },
+  "image-to-video/003.mp4": {
+    "prompt": "\"A lone traveler walks across a vast, reflective s_0d5e90ba-ad09-4b5d-a962-2d9589a6deaf.jpg_cond_3.50_81x480x848_16fps_seed300_0_r0_c0",
+    "original_filename": "\"A lone traveler walks across a vast, reflective s_0d5e90ba-ad09-4b5d-a962-2d9589a6deaf.jpg_cond_3.50_81x480x848_16fps_seed300_0_r0_c0.mp4",
+    "category": "image-to-video"
+  },
+  "image-to-video/004.mp4": {
+    "prompt": "\"A person is sprinkling powdered sugar over a plat_1e3ac3cd-aa0c-4971-a19e-05a456c3c85c.jpg_cond_3.50_81x480x848_16fps_seed300_0_r1_c0",
+    "original_filename": "\"A person is sprinkling powdered sugar over a plat_1e3ac3cd-aa0c-4971-a19e-05a456c3c85c.jpg_cond_3.50_81x480x848_16fps_seed300_0_r1_c0.mp4",
+    "category": "image-to-video"
+  },
+  "image-to-video/005.mp4": {
+    "prompt": "\"A sandpiper bird is seen foraging along the shore_0ae19187-1fda-46db-9b8c-566b15a32f0d.jpg_cond_3.50_81x480x848_16fps_seed300_0_r2_c1",
+    "original_filename": "\"A sandpiper bird is seen foraging along the shore_0ae19187-1fda-46db-9b8c-566b15a32f0d.jpg_cond_3.50_81x480x848_16fps_seed300_0_r2_c1.mp4",
+    "category": "image-to-video"
+  },
+  "image-to-video/006.mp4": {
+    "prompt": "\"A skier, identified as Ted Ligety, is captured mi_0f2313f5-5a61-4ccc-811c-f3bbf1d41151.jpg_cond_3.50_81x480x848_16fps_seed300_0_r0_c0",
+    "original_filename": "\"A skier, identified as Ted Ligety, is captured mi_0f2313f5-5a61-4ccc-811c-f3bbf1d41151.jpg_cond_3.50_81x480x848_16fps_seed300_0_r0_c0.mp4",
+    "category": "image-to-video"
+  },
+  "image-to-video/007.mp4": {
+    "prompt": "\"A vibrant red powder is being spread and mixed on_3ee25e00-eac7-42e5-977b-a53b786d14db.jpg_cond_3.50_81x480x848_16fps_seed300_0_r1_c0",
+    "original_filename": "\"A vibrant red powder is being spread and mixed on_3ee25e00-eac7-42e5-977b-a53b786d14db.jpg_cond_3.50_81x480x848_16fps_seed300_0_r1_c0.mp4",
+    "category": "image-to-video"
+  },
+  "image-to-video/008.mp4": {
+    "prompt": "\"The video captures a breathtaking aerial journey _3ab1923c-94f1-40c6-9210-72e011273d41.jpg_cond_3.50_81x480x848_16fps_seed300_0_r0_c1",
+    "original_filename": "\"The video captures a breathtaking aerial journey _3ab1923c-94f1-40c6-9210-72e011273d41.jpg_cond_3.50_81x480x848_16fps_seed300_0_r0_c1.mp4",
+    "category": "image-to-video"
+  },
+  "image-to-video/009.mp4": {
+    "prompt": "\"The video captures a breathtaking aerial view of _1ef4e3cd-22e0-45d0-b109-e13c3a98600c.jpg_cond_3.50_81x480x848_16fps_seed300_0_r0_c1",
+    "original_filename": "\"The video captures a breathtaking aerial view of _1ef4e3cd-22e0-45d0-b109-e13c3a98600c.jpg_cond_3.50_81x480x848_16fps_seed300_0_r0_c1.mp4",
+    "category": "image-to-video"
+  },
+  "image-to-video/010.mp4": {
+    "prompt": "\"The video captures a first-person perspective of _0b5adbe7-5e4e-4308-beef-b822dbbe8ca3.jpg_cond_3.50_81x480x848_16fps_seed300_0_r2_c1",
+    "original_filename": "\"The video captures a first-person perspective of _0b5adbe7-5e4e-4308-beef-b822dbbe8ca3.jpg_cond_3.50_81x480x848_16fps_seed300_0_r2_c1.mp4",
+    "category": "image-to-video"
+  },
+  "image-to-video/011.mp4": {
+    "prompt": "\"The video captures a majestic crane in flight ove_0a986cfc-c106-49af-a07c-600872d4e608.jpg_cond_3.50_81x480x848_16fps_seed300_0_r1_c0",
+    "original_filename": "\"The video captures a majestic crane in flight ove_0a986cfc-c106-49af-a07c-600872d4e608.jpg_cond_3.50_81x480x848_16fps_seed300_0_r1_c0.mp4",
+    "category": "image-to-video"
+  },
+  "image-to-video/012.mp4": {
+    "prompt": "\"The video captures a serene stream flowing throug_0f3e928b-937e-4fdd-8349-4eb23c71dc08.jpg_cond_3.50_81x480x848_16fps_seed300_0_r3_c1",
+    "original_filename": "\"The video captures a serene stream flowing throug_0f3e928b-937e-4fdd-8349-4eb23c71dc08.jpg_cond_3.50_81x480x848_16fps_seed300_0_r3_c1.mp4",
+    "category": "image-to-video"
+  },
+  "image-to-video/013.mp4": {
+    "prompt": "\"The video captures a serene underwater scene feat_1f37c131-d540-4aef-a70e-892831ce8c4d.jpg_cond_3.50_81x480x848_16fps_seed300_0_r1_c1",
+    "original_filename": "\"The video captures a serene underwater scene feat_1f37c131-d540-4aef-a70e-892831ce8c4d.jpg_cond_3.50_81x480x848_16fps_seed300_0_r1_c1.mp4",
+    "category": "image-to-video"
+  },
+  "image-to-video/014.mp4": {
+    "prompt": "\"The video captures an elephant walking through a _0c42fae9-aaca-48b6-88e5-942e12ac9271.jpg_cond_3.50_81x480x848_16fps_seed300_0_r1_c1",
+    "original_filename": "\"The video captures an elephant walking through a _0c42fae9-aaca-48b6-88e5-942e12ac9271.jpg_cond_3.50_81x480x848_16fps_seed300_0_r1_c1.mp4",
+    "category": "image-to-video"
+  },
+  "image-to-video/015.mp4": {
+    "prompt": "\"The video showcases a breathtaking aerial view of_3add99e9-0273-459a-a212-7de7a5b2e17e.jpg_cond_3.50_81x480x848_16fps_seed300_0_r1_c1",
+    "original_filename": "\"The video showcases a breathtaking aerial view of_3add99e9-0273-459a-a212-7de7a5b2e17e.jpg_cond_3.50_81x480x848_16fps_seed300_0_r1_c1.mp4",
+    "category": "image-to-video"
+  },
+  "image-to-video/016.mp4": {
+    "prompt": "\"The video showcases a breathtaking view of the ni_2bc895c5-a6d9-43ae-8279-58b1b05a4eef.jpg_cond_3.50_81x480x848_16fps_seed300_0_r2_c1",
+    "original_filename": "\"The video showcases a breathtaking view of the ni_2bc895c5-a6d9-43ae-8279-58b1b05a4eef.jpg_cond_3.50_81x480x848_16fps_seed300_0_r2_c1.mp4",
+    "category": "image-to-video"
+  },
+  "image-to-video/017.mp4": {
+    "prompt": "\"The video showcases a serene landscape featuring _0e53416d-e6d1-4f7f-b8eb-be6e5328f71f.jpg_cond_3.50_81x480x848_16fps_seed300_0_r2_c0",
+    "original_filename": "\"The video showcases a serene landscape featuring _0e53416d-e6d1-4f7f-b8eb-be6e5328f71f.jpg_cond_3.50_81x480x848_16fps_seed300_0_r2_c0.mp4",
+    "category": "image-to-video"
+  },
+  "image-to-video/018.mp4": {
+    "prompt": "\"The video showcases a serene waterfall cascading _0f434731-2886-4a78-acbe-2423ac498183.jpg_cond_3.50_81x480x848_16fps_seed300_0_r2_c0",
+    "original_filename": "\"The video showcases a serene waterfall cascading _0f434731-2886-4a78-acbe-2423ac498183.jpg_cond_3.50_81x480x848_16fps_seed300_0_r2_c0.mp4",
+    "category": "image-to-video"
+  },
+  "image-to-video/019.mp4": {
+    "prompt": "\"The video showcases a vibrant nighttime cityscape_2e24707d-ca5f-4c84-917c-a45b59d28411.jpg_cond_3.50_81x480x848_16fps_seed300_0_r0_c0",
+    "original_filename": "\"The video showcases a vibrant nighttime cityscape_2e24707d-ca5f-4c84-917c-a45b59d28411.jpg_cond_3.50_81x480x848_16fps_seed300_0_r0_c0.mp4",
+    "category": "image-to-video"
+  },
+  "image-to-video/020.mp4": {
+    "prompt": "\"The video showcases jellyfish gracefully swimming_4af0cd56-a135-4dee-bdd4-697347b5a884.jpg_cond_3.50_81x480x848_16fps_seed300_0_r2_c1",
+    "original_filename": "\"The video showcases jellyfish gracefully swimming_4af0cd56-a135-4dee-bdd4-697347b5a884.jpg_cond_3.50_81x480x848_16fps_seed300_0_r2_c1.mp4",
+    "category": "image-to-video"
+  },
+  "image-to-video/021.mp4": {
+    "prompt": "\"The video shows a close-up of a white cake being _5b1c007c-942b-4133-be39-52d4ac62b16e.jpg_cond_3.50_81x480x848_16fps_seed300_0_r1_c1",
+    "original_filename": "\"The video shows a close-up of a white cake being _5b1c007c-942b-4133-be39-52d4ac62b16e.jpg_cond_3.50_81x480x848_16fps_seed300_0_r1_c1.mp4",
+    "category": "image-to-video"
+  },
+  "image-to-video/022.mp4": {
+    "prompt": "\"The video shows a close-up of yellow paint being _3a61badc-d44f-460a-8010-d452fc5a3f52.jpg_cond_3.50_81x480x848_16fps_seed300_0_r1_c1",
+    "original_filename": "\"The video shows a close-up of yellow paint being _3a61badc-d44f-460a-8010-d452fc5a3f52.jpg_cond_3.50_81x480x848_16fps_seed300_0_r1_c1.mp4",
+    "category": "image-to-video"
+  },
+  "image-to-video/023.mp4": {
+    "prompt": "\"Three marmosets are perched on a tree branch, loo_2e6685ff-f1d6-4c58-a65f-192ab37075b7.jpg_cond_3.50_81x480x848_16fps_seed300_0_r0_c0",
+    "original_filename": "\"Three marmosets are perched on a tree branch, loo_2e6685ff-f1d6-4c58-a65f-192ab37075b7.jpg_cond_3.50_81x480x848_16fps_seed300_0_r0_c0.mp4",
+    "category": "image-to-video"
+  },
+  "image-to-video/024.mp4": {
+    "prompt": "This photo shows a person covered in blue sticky n_text_img2.webp_cond_3.50_81x640x640_16fps_seed999_0_r2_c0",
+    "original_filename": "This photo shows a person covered in blue sticky n_text_img2.webp_cond_3.50_81x640x640_16fps_seed999_0_r2_c0.mp4",
+    "category": "image-to-video"
+  },
+  "video-to-video/inpaint_prompt_a_black_background.mp4": {
+    "prompt": "Inpaint",
+    "original_filename": "\"inpaint. prompt: a black background with a white _3.50_33x384x688_16fps_seed300_0_r3_c0.mp4",
+    "category": "video-to-video"
+  },
+  "video-to-video/add_hand35033x384x68816fpsseed3000r0c0.mp4": {
+    "prompt": "Add_hand",
+    "original_filename": "Add hand_3.50_33x384x688_16fps_seed300_0_r0_c0.mp4",
+    "category": "video-to-video"
+  },
+  "video-to-video/add_horse35033x384x68816fpsseed3000r1c1.mp4": {
+    "prompt": "Add_horse",
+    "original_filename": "Add horse_3.50_33x384x688_16fps_seed300_0_r1_c1.mp4",
+    "category": "video-to-video"
+  },
+  "video-to-video/detect_book35033x384x68816fpsseed3000r0c1.mp4": {
+    "prompt": "Detect_book",
+    "original_filename": "Detect book_3.50_33x384x688_16fps_seed300_0_r0_c1.mp4",
+    "category": "video-to-video"
+  },
+  "video-to-video/detect_hand35033x384x68816fpsseed3000r0c0.mp4": {
+    "prompt": "Detect_hand",
+    "original_filename": "Detect hand_3.50_33x384x688_16fps_seed300_0_r0_c0.mp4",
+    "category": "video-to-video"
+  },
+  "video-to-video/convert_orange_into_lemon35033x384x68816fpsseed3000r0c0.mp4": {
+    "prompt": "Convert_orange_into_lemon",
+    "original_filename": "convert orange into lemon_3.50_33x384x688_16fps_seed300_0_r0_c0.mp4",
+    "category": "video-to-video"
+  },
+  "video-to-video/detect_depth35033x384x68816fpsseed3000r0c0.mp4": {
+    "prompt": "Detect_depth",
+    "original_filename": "detect depth_3.50_33x384x688_16fps_seed300_0_r0_c0.mp4",
+    "category": "video-to-video"
+  },
+  "video-to-video/detect_magnolia_tree35033x384x68816fpsseed3000r2c0.mp4": {
+    "prompt": "Detect_magnolia_tree",
+    "original_filename": "Detect magnolia tree_3.50_33x384x688_16fps_seed300_0_r2_c0.mp4",
+    "category": "video-to-video"
+  },
+  "video-to-video/001.mp4": {
+    "prompt": "Detect_sheep 3.50_33x384x688_16fps_seed300_0_r0_c1",
+    "original_filename": "Detect sheep_3.50_33x384x688_16fps_seed300_0_r0_c1.mp4",
+    "category": "video-to-video"
+  },
+  "video-to-video/002.mp4": {
+    "prompt": "Add_hand",
+    "original_filename": "add_hand35033x384x68816fpsseed3000r0c0.mp4",
+    "category": "video-to-video"
+  },
+  "video-to-video/003.mp4": {
+    "prompt": "Add_horse",
+    "original_filename": "add_horse35033x384x68816fpsseed3000r1c1.mp4",
+    "category": "video-to-video"
+  },
+  "video-to-video/004.mp4": {
+    "prompt": "Convert_orange_into_lemon",
+    "original_filename": "convert_orange_into_lemon35033x384x68816fpsseed3000r0c0.mp4",
+    "category": "video-to-video"
+  },
+  "video-to-video/005.mp4": {
+    "prompt": "Detect_book",
+    "original_filename": "detect_book35033x384x68816fpsseed3000r0c1.mp4",
+    "category": "video-to-video"
+  },
+  "video-to-video/006.mp4": {
+    "prompt": "Detect_depth",
+    "original_filename": "detect_depth35033x384x68816fpsseed3000r0c0.mp4",
+    "category": "video-to-video"
+  },
+  "video-to-video/007.mp4": {
+    "prompt": "Detect_hand",
+    "original_filename": "detect_hand35033x384x68816fpsseed3000r0c0.mp4",
+    "category": "video-to-video"
+  },
+  "video-to-video/008.mp4": {
+    "prompt": "Detect_magnolia_tree",
+    "original_filename": "detect_magnolia_tree35033x384x68816fpsseed3000r2c0.mp4",
+    "category": "video-to-video"
+  },
+  "video-to-video/009.mp4": {
+    "prompt": "Inpaint",
+    "original_filename": "inpaint. prompt: a 3d rendering of a colorful patt_3.50_33x384x688_16fps_seed300_0_r0_c0.mp4",
+    "category": "video-to-video"
+  },
+  "video-to-video/010.mp4": {
+    "prompt": "Inpaint",
+    "original_filename": "inpaint. prompt: a person holding a pen out of a w_3.50_33x384x688_16fps_seed300_0_r1_c0.mp4",
+    "category": "video-to-video"
+  },
+  "video-to-video/011.mp4": {
+    "prompt": "Inpaint",
+    "original_filename": "inpaint. prompt: an aerial view of rocks and water_3.50_33x384x688_16fps_seed300_0_r0_c0 2.mp4",
+    "category": "video-to-video"
+  },
+  "video-to-video/013.mp4": {
+    "prompt": "Inpaint",
+    "original_filename": "inpaint_prompt_a_black_background.mp4",
+    "category": "video-to-video"
+  },
+  "video-to-video/014.mp4": {
+    "prompt": "Make_flowers_Electric_Blue",
+    "original_filename": "Make flowers Electric Blue._3.50_33x384x688_16fps_seed300_0_r2_c0.mp4",
+    "category": "video-to-video"
+  },
+  "video-to-video/015.mp4": {
+    "prompt": "Make_it_abstract_Bauhaus_style",
+    "original_filename": "Make it abstract Bauhaus style._3.50_33x384x688_16fps_seed300_0_r0_c0.mp4",
+    "category": "video-to-video"
+  },
+  "video-to-video/016.mp4": {
+    "prompt": "Make_it_concept_art_style",
+    "original_filename": "Make it concept art style._3.50_33x384x688_16fps_seed300_0_r0_c0.mp4",
+    "category": "video-to-video"
+  },
+  "video-to-video/017.mp4": {
+    "prompt": "Make_it_doodle_style",
+    "original_filename": "Make it doodle style._3.50_33x384x688_16fps_seed300_0_r3_c0.mp4",
+    "category": "video-to-video"
+  },
+  "video-to-video/018.mp4": {
+    "prompt": "Make_it_gothic_gloomy",
+    "original_filename": "Make it gothic gloomy._3.50_33x384x688_16fps_seed300_0_r0_c1.mp4",
+    "category": "video-to-video"
+  },
+  "video-to-video/019.mp4": {
+    "prompt": "Make_it_traditional_Chinese_ink_painting_style",
+    "original_filename": "Make it traditional Chinese ink painting style._3.50_33x384x688_16fps_seed300_0_r0_c1.mp4",
+    "category": "video-to-video"
+  },
+  "video-to-video/020.mp4": {
+    "prompt": "Make_the_beach_golden_sandy",
+    "original_filename": "Make the beach golden sandy._3.50_33x384x688_16fps_seed300_0_r0_c1.mp4",
+    "category": "video-to-video"
+  },
+  "video-to-video/021.mp4": {
+    "prompt": "Make_the_jellyfish_maroon_color",
+    "original_filename": "Make the jellyfish maroon color._3.50_33x384x688_16fps_seed300_0_r3_c1.mp4",
+    "category": "video-to-video"
+  },
+  "video-to-video/022.mp4": {
+    "prompt": "Make_the_train_metallic_silver_and_rusty",
+    "original_filename": "Make the train metallic silver and rusty._3.50_33x384x688_16fps_seed300_0_r1_c1.mp4",
+    "category": "video-to-video"
+  },
+  "video-to-video/023.mp4": {
+    "prompt": "Make_the_vase_golden",
+    "original_filename": "Make the vase golden._3.50_33x384x688_16fps_seed300_0_r1_c1.mp4",
+    "category": "video-to-video"
+  },
+  "video-to-video/024.mp4": {
+    "prompt": "Outpaint",
+    "original_filename": "outpaint. prompt: a black cup of coffee sits on a _3.50_33x384x688_16fps_seed300_0_r2_c0.mp4",
+    "category": "video-to-video"
+  },
+  "video-to-video/012.mp4": {
+    "prompt": "Turn_blackberries_into_red_currant",
+    "original_filename": "Turn blackberries into red currant_3.50_33x384x688_16fps_seed300_0_r3_c1.mp4",
+    "category": "video-to-video"
+  },
+  "video-to-video/025.mp4": {
+    "prompt": "Outpaint. prompt: a table with food and plates on _3.50_33x384x688_16fps_seed300_0_r2_c0",
+    "original_filename": "outpaint. prompt: a table with food and plates on _3.50_33x384x688_16fps_seed300_0_r2_c0.mp4",
+    "category": "video-to-video"
+  },
+  "video-to-video/026.mp4": {
+    "prompt": "Outpaint. prompt: a woman is holding a shopping ba_3.50_33x384x688_16fps_seed300_0_r0_c1",
+    "original_filename": "outpaint. prompt: a woman is holding a shopping ba_3.50_33x384x688_16fps_seed300_0_r0_c1.mp4",
+    "category": "video-to-video"
+  },
+  "video-to-video/027.mp4": {
+    "prompt": "Outpaint. prompt: an aerial view of a road and for_3.50_33x384x688_16fps_seed300_0_r2_c0",
+    "original_filename": "outpaint. prompt: an aerial view of a road and for_3.50_33x384x688_16fps_seed300_0_r2_c0.mp4",
+    "category": "video-to-video"
+  },
+  "video-to-video/028.mp4": {
+    "prompt": "Outpaint. prompt: the golden temple in amritsar, i_3.50_33x384x688_16fps_seed300_0_r2_c0",
+    "original_filename": "outpaint. prompt: the golden temple in amritsar, i_3.50_33x384x688_16fps_seed300_0_r2_c0.mp4",
+    "category": "video-to-video"
+  },
+  "comparisons/001.mp4": {
+    "prompt": "A panda drinking coffee in a cafe in Paris, in cyberpunk style",
+    "original_filename": "A panda drinking coffee in a cafe in Paris, in cyberpunk style-0.mp4",
+    "category": "comparisons"
+  },
+  "comparisons/002.mp4": {
+    "prompt": "A person is playing piano",
+    "original_filename": "A person is playing piano-2.mp4",
+    "category": "comparisons"
+  },
+  "comparisons/003.mp4": {
+    "prompt": "A person is tasting beer",
+    "original_filename": "A person is tasting beer-2.mp4",
+    "category": "comparisons"
+  },
+  "comparisons/004.mp4": {
+    "prompt": "a backpack and an umbrella",
+    "original_filename": "a backpack and an umbrella-3.mp4",
+    "category": "comparisons"
+  },
+  "comparisons/005.mp4": {
+    "prompt": "A 3D model of a 1800s victorian house.",
+    "original_filename": "A 3D model of a 1800s victorian house.-4.mp4",
+    "category": "comparisons"
+  },
+  "comparisons/006.mp4": {
+    "prompt": "A corgi's head depicted as an explosion of a nebula",
+    "original_filename": "A corgi's head depicted as an explosion of a nebula-1.mp4",
+    "category": "comparisons"
+  },
+  "comparisons/007.mp4": {
+    "prompt": "A cute happy Corgi playing in park, sunset",
+    "original_filename": "A cute happy Corgi playing in park, sunset-0.mp4",
+    "category": "comparisons"
+  },
+  "comparisons/008.mp4": {
+    "prompt": "A shark swimming in clear Caribbean ocean",
+    "original_filename": "A shark swimming in clear Caribbean ocean-3.mp4",
+    "category": "comparisons"
+  },
+  "comparisons/009.mp4": {
+    "prompt": "a bird",
+    "original_filename": "a bird-3.mp4",
+    "category": "comparisons"
+  },
+  "comparisons/010.mp4": {
+    "prompt": "a drone flying over a snowy forest.",
+    "original_filename": "a drone flying over a snowy forest.-2.mp4",
+    "category": "comparisons"
+  },
+  "comparisons/011.mp4": {
+    "prompt": "arch",
+    "original_filename": "arch-1.mp4",
+    "category": "comparisons"
+  },
+  "comparisons/012.mp4": {
+    "prompt": "cliff",
+    "original_filename": "cliff-2.mp4",
+    "category": "comparisons"
+  },
+  "comparisons/013.mp4": {
+    "prompt": "a person drinking coffee in a cafe",
+    "original_filename": "a person drinking coffee in a cafe-1.mp4",
+    "category": "comparisons"
+  },
+  "comparisons/014.mp4": {
+    "prompt": "In a still frame, a stop sign",
+    "original_filename": "In a still frame, a stop sign-3.mp4",
+    "category": "comparisons"
+  },
+  "comparisons/015.mp4": {
+    "prompt": "A boat sailing leisurely along the Seine River with the Eiffel Tower in background, in super slow motion",
+    "original_filename": "A boat sailing leisurely along the Seine River with the Eiffel Tower in background, in super slow motion-0.mp4",
+    "category": "comparisons"
+  },
+  "comparisons/016.mp4": {
+    "prompt": "The bund Shanghai, zoom in",
+    "original_filename": "The bund Shanghai, zoom in-4.mp4",
+    "category": "comparisons"
+  },
+  "longer-generation/a_corgi_wearing_neonpink_sunglasses.mp4": {
+    "prompt": "a corgi wearing neon-pink sunglasses on a boat",
+    "original_filename": "a corgi wearing neon-pink sunglasses on a boat.mp4",
+    "category": "longer-generation"
+  },
+  "longer-generation/pov_from_the_boat_deck.mp4": {
+    "prompt": "POV from the boat deck looking at a corgi wearing neon-pink sunglasses; wind noise feel, slight horizon bob, water droplets on l",
+    "original_filename": "POV from the boat deck looking at a corgi wearing neon-pink sunglasses; wind noise feel, slight horizon bob, water droplets on l.mp4",
+    "category": "longer-generation"
+  },
+  "longer-generation/a_black_ink_drop_blooming.mp4": {
+    "prompt": "a black ink drop blooming through clear water in a tumbler; static macro with minimal parallax; tendrils feathering out in slow",
+    "original_filename": "a black ink drop blooming through clear water in a tumbler; static macro with minimal parallax; tendrils feathering out in slow .mp4",
+    "category": "longer-generation"
+  },
+  "longer-generation/a_corgi_dog_wearing_a.mp4": {
+    "prompt": "a corgi dog wearing a tie sat by a window",
+    "original_filename": "a corgi dog wearing a tie sat by a window, raining_3.50_161x480x848_16fps_seed200_4_r2_c0.mp4",
+    "category": "longer-generation"
+  },
+  "longer-generation/a_corgi_dog_wearing_a_1.mp4": {
+    "prompt": "a corgi dog wearing a tie sat by a window",
+    "original_filename": "a corgi dog wearing a tie sat by a window, raining_3.50_161x480x848_16fps_seed200_4_r2_c1.mp4",
+    "category": "longer-generation"
+  },
+  "longer-generation/a_corgi_dog_wearing_a_2.mp4": {
+    "prompt": "a corgi dog wearing a tie sitting in front of a blackboard",
+    "original_filename": "a corgi dog wearing a tie sitting in front of a blackboard.mp4",
+    "category": "longer-generation"
+  },
+  "longer-generation/a_corgi_dog_wearing_a_3.mp4": {
+    "prompt": "a corgi dog wearing a tie with a window in the background",
+    "original_filename": "a corgi dog wearing a tie with a window in the bac_3.50_481x384x688_16fps_seed200_4_r3_c0.mp4",
+    "category": "longer-generation"
+  },
+  "longer-generation/a_corgi_dozing_in_a.mp4": {
+    "prompt": "a corgi dozing in a sunbeam on hardwood floor; slow dolly-in at ankle height; dust motes drifting in the light shaft, shallow de",
+    "original_filename": "a corgi dozing in a sunbeam on hardwood floor; slow dolly-in at ankle height; dust motes drifting in the light shaft, shallow de.mp4",
+    "category": "longer-generation"
+  },
+  "longer-generation/a_corgi_sticking_its_head.mp4": {
+    "prompt": "a corgi sticking its head out of a car window; tracking from mirror level, horizon bob from suspension; fur whipping in the wind",
+    "original_filename": "a corgi sticking its head out of a car window; tracking from mirror level, horizon bob from suspension; fur whipping in the wind.mp4",
+    "category": "longer-generation"
+  },
+  "longer-generation/a_dim_street_lit_only.mp4": {
+    "prompt": "a dim street lit only by vending machines; slow dolly-forward at waist height; saturated glow halos, tiny insects swarming in li",
+    "original_filename": "a dim street lit only by vending machines; slow dolly-forward at waist height; saturated glow halos, tiny insects swarming in li.mp4",
+    "category": "longer-generation"
+  },
+  "longer-generation/paper_lanterns_bobbing_in_a.mp4": {
+    "prompt": "paper lanterns bobbing in a night festival; over-the-shoulder follow maintaining subject center; soft depth of field and creamy",
+    "original_filename": "paper lanterns bobbing in a night festival; over-the-shoulder follow maintaining subject center; soft depth of field and creamy .mp4",
+    "category": "longer-generation"
+  },
+  "longer-generation/a_corgi_dog_sits_in.mp4": {
+    "prompt": "a corgi dog sits in front of a blackboard teaching",
+    "original_filename": "a corgi dog sits in front of a blackboard teaching.mp4",
+    "category": "longer-generation"
+  },
+  "longer-generation/a_corgi_dog_wearing_a_4.mp4": {
+    "prompt": "a corgi dog wearing a tie with a tree in the background",
+    "original_filename": "a corgi dog wearing a tie with a tree in the backg_3.50_81x384x688_16fps_seed19_4_r2_c1.mp4",
+    "category": "longer-generation"
+  },
+  "longer-generation/this_closeup_shot_of_a.mp4": {
+    "prompt": "This close-up shot of a Victoria crowned pigeon",
+    "original_filename": "This close-up shot of a Victoria crowned pigeon.mp4",
+    "category": "longer-generation"
+  },
+  "longer-generation/school_of_koi_swirling_just.mp4": {
+    "prompt": "school of koi swirling just below pond surface; top-down gimbal drift; occasional surface glare flare, ripples distorting bodies",
+    "original_filename": "school of koi swirling just below pond surface; top-down gimbal drift; occasional surface glare flare, ripples distorting bodies.mp4",
+    "category": "longer-generation"
+  },
+  "longer-generation/subway_doors_closing_on_a.mp4": {
+    "prompt": "subway doors closing on a busy platform; low-angle from floor level; rolling shutter wobble as train accelerates, reflections sl",
+    "original_filename": "subway doors closing on a busy platform; low-angle from floor level; rolling shutter wobble as train accelerates, reflections sl.mp4",
+    "category": "longer-generation"
+  },
+  "longer-generation/zoomin_corgi_face.mp4": {
+    "prompt": "zoom-in corgi face",
+    "original_filename": "zoom-in corgi face.mp4",
+    "category": "longer-generation"
+  },
+  "failure-cases/a_goat_kid_hopping_onto.mp4": {
+    "prompt": "a goat kid hopping onto a small boulder then back down; handheld with minimal sway; blue-hour ambience, ultra-realistic, 4K; nat",
+    "original_filename": "a goat kid hopping onto a small boulder then back down; handheld with minimal sway; blue-hour ambience, ultra-realistic, 4K; nat.mp4",
+    "category": "failure-cases"
+  },
+  "failure-cases/a_skateboarder_kickflipping_off_a.mp4": {
+    "prompt": "a skateboarder kickflipping off a curb; shallow parallax orbit at chest height; slight chromatic aberration at highlights; blue-",
+    "original_filename": "a skateboarder kickflipping off a curb; shallow parallax orbit at chest height; slight chromatic aberration at highlights; blue-.mp4",
+    "category": "failure-cases"
+  },
+  "failure-cases/a_trail_runner_cresting_a.mp4": {
+    "prompt": "a trail runner cresting a ridge at dawn; over-the-shoulder follow maintaining subject center; tiny focus breathing during rack f",
+    "original_filename": "a trail runner cresting a ridge at dawn; over-the-shoulder follow maintaining subject center; tiny focus breathing during rack f.mp4",
+    "category": "failure-cases"
+  },
+  "failure-cases/fresh_bread_being_sliced_on.mp4": {
+    "prompt": "fresh bread being sliced on a wooden board; close-up; kitchen window light, ultra-realistic, 4K.",
+    "original_filename": "fresh bread being sliced on a wooden board; close-up; kitchen window light, ultra-realistic, 4K..mp4",
+    "category": "failure-cases"
+  },
+  "longer-generation/a_golden_doodle_tilting_its.mp4": {
+    "prompt": "a golden doodle tilting its head at a squeaky toy",
+    "original_filename": "a golden doodle tilting its head at a squeaky toy;_3.50_481x480x848_16fps_seed92_0_r1_c1.mp4",
+    "category": "longer-generation"
+  },
+  "longer-generation/a_street_waffle_being_dusted.mp4": {
+    "prompt": "a street waffle being dusted with powdered sugar; tight close-up from plate level; sugar creating tiny puffs on impact, some gra",
+    "original_filename": "a street waffle being dusted with powdered sugar; tight close-up from plate level; sugar creating tiny puffs on impact, some gra.mp4",
+    "category": "longer-generation"
+  },
+  "failure-cases/a_green_powder_is_being.mp4": {
+    "prompt": "\"A green powder is being poured into a test tube",
+    "original_filename": "\"A green powder is being poured into a test tube.mp4",
+    "category": "failure-cases"
+  },
+  "failure-cases/a_dog_shaking_off_water.mp4": {
+    "prompt": "a dog shaking off water on a dock; handheld with minimal sway; blue-hour ambience, ultra-realistic, 4K; light film grain.",
+    "original_filename": "a dog shaking off water on a dock; handheld with minimal sway; blue-hour ambience, ultra-realistic, 4K; light film grain..mp4",
+    "category": "failure-cases"
+  },
+  "failure-cases/a_hamster_running_steadily_in.mp4": {
+    "prompt": "a hamster running steadily in a clear exercise wheel; handheld with minimal sway; golden-hour warmth, ultra-realistic, 4K; light",
+    "original_filename": "a hamster running steadily in a clear exercise wheel; handheld with minimal sway; golden-hour warmth, ultra-realistic, 4K; light.mp4",
+    "category": "failure-cases"
+  },
+  "failure-cases/a_small_octopus_exploring_a.mp4": {
+    "prompt": "a small octopus exploring a jar with one curious arm; gentle push-in from a stable tripod; golden-hour warmth, ultra-realistic,",
+    "original_filename": "a small octopus exploring a jar with one curious arm; gentle push-in from a stable tripod; golden-hour warmth, ultra-realistic, .mp4",
+    "category": "failure-cases"
+  },
+  "longer-generation/fall_leaves_spiraling_down_in.mp4": {
+    "prompt": "fall leaves spiraling down in a courtyard; upward-looking locked-off shot; branches framing sky, occasional leaf grazing lens; l",
+    "original_filename": "fall leaves spiraling down in a courtyard; upward-looking locked-off shot; branches framing sky, occasional leaf grazing lens; l.mp4",
+    "category": "longer-generation"
+  }
+}
