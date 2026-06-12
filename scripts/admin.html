@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Project Editor — Scalable Normalizing Flows</title>
+<style>
+  :root{
+    --bg:#07080c;--surface:#12141f;--surface2:#171a28;--border:#232739;--border2:#2e3450;
+    --text:#eef1f8;--dim:#9aa3bd;--faint:#69708a;--accent:#6ea8ff;--accent2:#b58bff;
+    --grad:linear-gradient(120deg,#6ea8ff,#b58bff 55%,#ff8bd0);--ok:#6ee7a8;--warn:#ffb86b;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  a{color:var(--accent)}
+  .bar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:16px;
+    padding:14px 24px;background:rgba(7,8,12,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+  .bar h1{font-size:1.05rem;margin:0;font-weight:800;letter-spacing:-.02em}
+  .bar .spacer{flex:1}
+  .status{font-size:.85rem;color:var(--dim)}
+  .btn{padding:9px 18px;border-radius:999px;border:1px solid var(--border2);background:var(--surface2);
+    color:var(--text);font-weight:700;font-size:.88rem;cursor:pointer;transition:.15s}
+  .btn:hover{border-color:var(--accent);transform:translateY(-1px)}
+  .btn.primary{background:var(--grad);color:#0a0a12;border:none}
+  .btn.primary:disabled{opacity:.5;cursor:default;transform:none}
+  .wrap{max-width:1020px;margin:0 auto;padding:24px}
+  .hint{color:var(--dim);font-size:.9rem;margin:0 0 18px}
+  .card{display:grid;grid-template-columns:300px 1fr;gap:20px;background:var(--surface);
+    border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:16px}
+  .card.hidden-proj{opacity:.55}
+  .preview{position:relative;aspect-ratio:16/10;border-radius:12px;overflow:hidden;background:var(--surface2);border:1px solid var(--border)}
+  .preview img,.preview video{width:100%;height:100%;object-fit:cover}
+  .preview .arty{position:absolute;inset:0;display:flex;align-items:flex-end;padding:14px;
+    background:radial-gradient(70% 90% at 14% 16%,rgba(110,168,255,.55),transparent 60%),
+      radial-gradient(66% 86% at 90% 26%,rgba(181,139,255,.5),transparent 60%),
+      radial-gradient(95% 85% at 55% 112%,rgba(40,70,170,.6),transparent 64%),#0a0e1c;
+    font-weight:800;font-size:1.3rem;color:#fff}
+  .preview .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--faint);font-size:.85rem}
+  .ord{display:flex;gap:6px;margin-top:10px}
+  .ord button{flex:1;padding:5px;border-radius:8px;border:1px solid var(--border2);background:var(--surface2);color:var(--dim);cursor:pointer}
+  .ord button:hover{color:var(--text);border-color:var(--accent)}
+  .fields{display:flex;flex-direction:column;gap:10px;min-width:0}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .name{font-size:1.3rem;font-weight:800;letter-spacing:-.02em}
+  label{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);display:block;margin-bottom:3px}
+  input[type=text],textarea{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:9px;
+    color:var(--text);padding:8px 11px;font:inherit;font-size:.88rem}
+  textarea{resize:vertical;min-height:60px;line-height:1.5}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .seg{display:inline-flex;border:1px solid var(--border2);border-radius:9px;overflow:hidden}
+  .seg button{padding:7px 14px;background:var(--surface2);color:var(--dim);border:none;cursor:pointer;font-weight:600;font-size:.82rem}
+  .seg button.on{background:var(--grad);color:#0a0a12}
+  .chk{display:inline-flex;align-items:center;gap:7px;font-size:.85rem;color:var(--dim);cursor:pointer}
+  .chk input{width:16px;height:16px;accent-color:var(--accent)}
+  .uploader{border:1px dashed var(--border2);border-radius:10px;padding:12px;text-align:center;color:var(--dim);
+    font-size:.85rem;cursor:pointer;transition:.15s}
+  .uploader:hover,.uploader.drag{border-color:var(--accent);color:var(--text);background:var(--surface2)}
+  .uploader input{display:none}
+  .fname{font-size:.78rem;color:var(--faint);margin-top:6px;word-break:break-all}
+  .venue-badge{font-size:.7rem;font-weight:700;padding:3px 9px;border-radius:6px;background:rgba(110,168,255,.12);color:var(--accent);border:1px solid var(--border2)}
+  .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--surface);border:1px solid var(--border2);
+    padding:12px 20px;border-radius:12px;font-size:.88rem;box-shadow:0 10px 40px rgba(0,0,0,.5);max-width:80vw;display:none}
+  .toast.show{display:block}
+  .toast.ok{border-color:var(--ok)}
+  .toast.err{border-color:#ff6b6b}
+  code{background:var(--surface2);padding:1px 6px;border-radius:5px;font-size:.85em}
+</style>
+</head>
+<body>
+<div class="bar">
+  <h1>✎ Project Editor</h1>
+  <span class="venue-badge">Scalable Normalizing Flows</span>
+  <div class="spacer"></div>
+  <span class="status" id="status">loading…</span>
+  <a class="btn" href="/index.html" target="_blank">Open site ↗</a>
+  <button class="btn primary" id="save" disabled>Save &amp; Rebuild</button>
+</div>
+
+<div class="wrap">
+  <p class="hint">Order below = <b>importance</b> order of the top block grid (drag with ▲▼). Toggle each tile between its <b>uploaded image</b> and the <b>artistic block</b>. Upload replaces the tile cover; the full figure still shows on the project's own page. Hidden projects are dimmed. Click <b>Save &amp; Rebuild</b> to write files and regenerate the site, then refresh the site tab.</p>
+  <div id="list"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+let DATA = null;        // full projects.json
+let P = [];             // working copy of projects, in importance order
+const $ = (s,el=document)=>el.querySelector(s);
+const status = (t)=>{ $("#status").textContent = t; };
+const toast = (msg,kind="")=>{ const t=$("#toast"); t.textContent=msg; t.className="toast show "+kind; setTimeout(()=>t.className="toast",3200); };
+
+async function load(){
+  DATA = await (await fetch("/data/projects.json")).json();
+  const order = DATA.site.importanceOrder || [];
+  const byId = Object.fromEntries(DATA.projects.map(p=>[p.id,p]));
+  // importance order first, then any project not listed
+  P = order.map(id=>byId[id]).filter(Boolean);
+  for(const p of DATA.projects) if(!P.includes(p)) P.push(p);
+  render();
+  status(P.length+" projects loaded");
+}
+
+function tilePreview(p){
+  const ext = (p.image||"").toLowerCase();
+  if(p.styledTile || p.comingSoon || !p.image)
+    return `<div class="arty">${p.name}</div>`;
+  if(ext.endsWith(".mp4"))
+    return `<video src="/assets/img/projects/${p.image}" autoplay muted loop playsinline></video>`;
+  return `<img src="/assets/img/projects/${p.image}?t=${Date.now()}" alt="">`;
+}
+
+function render(){
+  const list = $("#list"); list.innerHTML="";
+  P.forEach((p,idx)=>{
+    const card=document.createElement("div");
+    card.className="card"+(p.hidden?" hidden-proj":"");
+    const L=p.links||{};
+    card.innerHTML=`
+      <div>
+        <div class="preview" data-prev>${tilePreview(p)}</div>
+        <div class="ord">
+          <button data-up ${idx===0?"disabled":""}>▲ up</button>
+          <button data-down ${idx===P.length-1?"disabled":""}>▼ down</button>
+        </div>
+        <div class="seg" style="margin-top:10px;width:100%">
+          <button data-mode="img" class="${!p.styledTile?"on":""}" style="flex:1">Image</button>
+          <button data-mode="art" class="${p.styledTile?"on":""}" style="flex:1">Artistic block</button>
+        </div>
+        <div class="uploader" data-drop>Click or drop image / mp4 to set the tile cover
+          <input type="file" accept="image/*,video/mp4" data-file>
+          <div class="fname">${p.image?("current: "+p.image):"no cover image"}</div>
+        </div>
+      </div>
+      <div class="fields">
+        <div class="row"><span class="name">${p.name}</span>
+          <span class="venue-badge">${p.venue||""}</span>
+          <span style="flex:1"></span>
+          <label class="chk"><input type="checkbox" data-hidden ${p.hidden?"checked":""}> hidden</label>
+          <label class="chk"><input type="checkbox" data-featured ${p.featured?"checked":""}> in line</label>
+        </div>
+        <div class="grid2">
+          <div><label>Name</label><input type="text" data-f="name" value="${esc(p.name)}"></div>
+          <div><label>Venue</label><input type="text" data-f="venue" value="${esc(p.venue||"")}"></div>
+        </div>
+        <div><label>Title</label><input type="text" data-f="title" value="${esc(p.title||"")}"></div>
+        <div><label>Authors</label><input type="text" data-f="authors" value="${esc(p.authors||"")}"></div>
+        <div class="grid2">
+          <div><label>arXiv URL</label><input type="text" data-link="arxiv" value="${esc(L.arxiv||"")}"></div>
+          <div><label>Code URL</label><input type="text" data-link="code" value="${esc(L.code||"")}"></div>
+        </div>
+        <div class="grid2">
+          <div><label>Blog URL</label><input type="text" data-link="blog" value="${esc(L.blog||"")}"></div>
+          <div><label>Project page / external</label><input type="text" data-f="external" value="${esc(p.external||"")}"></div>
+        </div>
+        <div><label>Abstract</label><textarea data-f="abstract">${esc(p.abstract||"")}</textarea></div>
+      </div>`;
+    wire(card,p,idx);
+    list.appendChild(card);
+  });
+}
+
+function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+
+function wire(card,p,idx){
+  card.querySelectorAll("[data-f]").forEach(el=>el.addEventListener("input",()=>{ p[el.dataset.f]=el.value; }));
+  card.querySelectorAll("[data-link]").forEach(el=>el.addEventListener("input",()=>{ p.links=p.links||{}; const v=el.value.trim(); if(v) p.links[el.dataset.link]=v; else delete p.links[el.dataset.link]; }));
+  $("[data-hidden]",card).addEventListener("change",e=>{ p.hidden=e.target.checked||undefined; card.classList.toggle("hidden-proj",!!p.hidden); });
+  $("[data-featured]",card).addEventListener("change",e=>{ p.featured=e.target.checked; });
+  card.querySelectorAll("[data-mode]").forEach(b=>b.addEventListener("click",()=>{
+    p.styledTile = (b.dataset.mode==="art") || undefined;
+    card.querySelectorAll("[data-mode]").forEach(x=>x.classList.toggle("on", x.dataset.mode===b.dataset.mode));
+    $("[data-prev]",card).innerHTML = tilePreview(p);
+  }));
+  $("[data-up]",card).addEventListener("click",()=>{ if(idx>0){ [P[idx-1],P[idx]]=[P[idx],P[idx-1]]; render(); } });
+  $("[data-down]",card).addEventListener("click",()=>{ if(idx<P.length-1){ [P[idx+1],P[idx]]=[P[idx],P[idx+1]]; render(); } });
+
+  const drop=$("[data-drop]",card), file=$("[data-file]",card);
+  drop.addEventListener("click",()=>file.click());
+  ["dragover","dragenter"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add("drag");}));
+  ["dragleave","drop"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove("drag");}));
+  drop.addEventListener("drop",e=>{ if(e.dataTransfer.files[0]) upload(e.dataTransfer.files[0],p,card); });
+  file.addEventListener("change",e=>{ if(e.target.files[0]) upload(e.target.files[0],p,card); });
+}
+
+function upload(f,p,card){
+  const ext = (f.name.split(".").pop()||"png").toLowerCase();
+  const reader=new FileReader();
+  status("uploading "+f.name+"…");
+  reader.onload=async()=>{
+    try{
+      const r=await fetch("/api/upload",{method:"POST",headers:{"content-type":"application/json"},
+        body:JSON.stringify({id:p.id,ext,dataUrl:reader.result})});
+      const j=await r.json();
+      if(j.filename){
+        p.image=j.filename;
+        p.styledTile=undefined;           // switching to an uploaded image
+        card.querySelectorAll("[data-mode]").forEach(x=>x.classList.toggle("on",x.dataset.mode==="img"));
+        $(".fname",card).textContent="current: "+p.image;
+        $("[data-prev]",card).innerHTML=tilePreview(p);
+        toast("Uploaded "+j.filename+" — remember to Save","ok");
+        status("uploaded "+j.filename);
+      } else throw new Error(j.error||"upload failed");
+    }catch(err){ toast("Upload failed: "+err.message,"err"); status("upload error"); }
+  };
+  reader.readAsDataURL(f);
+}
+
+$("#save").addEventListener("click",async()=>{
+  const btn=$("#save"); btn.disabled=true; status("saving & rebuilding…");
+  try{
+    const importanceOrder = P.map(p=>p.id);
+    const r=await fetch("/api/save",{method:"POST",headers:{"content-type":"application/json"},
+      body:JSON.stringify({projects:P, importanceOrder})});
+    const j=await r.json();
+    if(j.ok){ toast("Saved & rebuilt ✓  Refresh the site tab to see changes.","ok"); status("saved — "+(j.output||"done")); }
+    else throw new Error(j.error||"save failed");
+  }catch(err){ toast("Save failed: "+err.message,"err"); status("save error"); }
+  btn.disabled=false;
+});
+
+load().then(()=>$("#save").disabled=false).catch(e=>{status("failed to load: "+e.message);});
+</script>
+</body>
+</html>

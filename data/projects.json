@@ -1,0 +1,619 @@
+{
+  "site": {
+    "title": "Scalable Normalizing Flows",
+    "tagline": "Next-Generation Generative Models",
+    "subtitle": "A research program reviving normalizing flows as scalable, end-to-end, likelihood-based generators — across images, video, language, and unified multimodality.",
+    "lead": "Built on the <strong>Transformer Autoregressive Flow (TARFlow)</strong>, this line of work shows that <strong>normalizing flows</strong> — long overshadowed by diffusion models — are in fact capable generative models that scale. By keeping the model an exact, invertible, maximum-likelihood normalizing flow while borrowing the architecture of autoregressive Transformers, these invertible models reach high-resolution image synthesis, video world models, continuous-space language modeling, and unified multimodal generation.",
+    "author": {
+      "name": "Jiatao Gu",
+      "name_zh": "顾佳涛",
+      "github": "https://github.com/MultiPath",
+      "twitter": "https://twitter.com/thoma_gu",
+      "scholar": "https://scholar.google.com/citations?user=cB1mFBsAAAAJ",
+      "homepage": "https://multipath.github.io"
+    },
+    "importanceOrder": [
+      "starflow2",
+      "starflow-v",
+      "nf-cot",
+      "ntm",
+      "itarflow",
+      "tarflow",
+      "fae",
+      "starflow",
+      "nfm",
+      "tarflowlm"
+    ]
+  },
+  "categories": [
+    "All",
+    "Image",
+    "Video",
+    "Language",
+    "Multimodal",
+    "Theory",
+    "Related"
+  ],
+  "projects": [
+    {
+      "id": "tarflow",
+      "name": "TARFlow",
+      "title": "Normalizing Flows are Capable Generative Models",
+      "authors": "Shuangfei Zhai, Ruixiang Zhang, Preetum Nakkiran, David Berthelot, Jiatao Gu, Huangjie Zheng, Tianrong Chen, Miguel Angel Bautista, Navdeep Jaitly, Joshua Susskind",
+      "venue": "ICML 2025",
+      "award": "Oral, top 1%",
+      "year": 2025,
+      "categories": [
+        "Image",
+        "Theory"
+      ],
+      "featured": true,
+      "image": "zhai2025normalizing.png",
+      "abstract": "Normalizing Flows (NFs) are likelihood-based models for continuous inputs. They have demonstrated promising results on both density estimation and generative modeling tasks, but have received relatively little attention in recent years. In this work, we demonstrate that NFs are more powerful than previously believed. We present TarFlow: a simple and scalable architecture that enables highly performant NF models. TarFlow can be thought of as a Transformer-based variant of Masked Autoregressive Flows (MAFs): it consists of a stack of autoregressive Transformer blocks on image patches, alternating the autoregression direction between layers. TarFlow is straightforward to train end-to-end, and capable of directly modeling and generating pixels. We also propose three key techniques to improve sample quality: Gaussian noise augmentation during training, a post training denoising procedure, and an effective guidance method for both class-conditional and unconditional settings. Putting these together, TarFlow sets new state-of-the-art results on likelihood estimation for images, beating the previous best methods by a large margin, and generates samples with quality and diversity comparable to diffusion models, for the first time with a stand-alone NF model.",
+      "links": {
+        "arxiv": "https://arxiv.org/abs/2412.06329",
+        "code": "https://github.com/apple/ml-tarflow"
+      },
+      "bibtex": "@inproceedings{zhai2025normalizing,\n  title     = {Normalizing Flows are Capable Generative Models},\n  author    = {Zhai, Shuangfei and Zhang, Ruixiang and Nakkiran, Preetum and Berthelot, David and Gu, Jiatao and Zheng, Huangjie and Chen, Tianrong and Bautista, Miguel Angel and Jaitly, Navdeep and Susskind, Joshua},\n  booktitle = {International Conference on Machine Learning (ICML)},\n  year      = {2025}\n}",
+      "tldr": "Normalizing flows are far more capable than believed: TarFlow — a simple, scalable Transformer-based normalizing flow — models and generates pixels directly, setting new state-of-the-art image likelihoods and, for the first time with a stand-alone NF, producing samples of diffusion-level quality.",
+      "contributions": [
+        "A Transformer variant of Masked Autoregressive Flows: a stack of autoregressive Transformer blocks over image patches, alternating the autoregression direction between layers.",
+        "Three techniques that sharply improve sample quality — Gaussian noise augmentation during training, a post-training denoising procedure, and an effective guidance method.",
+        "New state-of-the-art likelihood estimation for images, with sample quality and diversity comparable to diffusion models from a stand-alone normalizing flow."
+      ],
+      "fit": "contain",
+      "size": "wide"
+    },
+    {
+      "id": "starflow",
+      "name": "STARFlow",
+      "title": "Scaling Latent Normalizing Flows for High-resolution Image Synthesis",
+      "authors": "Jiatao Gu, Tianrong Chen, David Berthelot, Huangjie Zheng, Yuyang Wang, Ruixiang Zhang, Laurent Dinh, Miguel Angel Bautista, Joshua Susskind, Shuangfei Zhai",
+      "venue": "NeurIPS 2025",
+      "award": "Spotlight, top 3%",
+      "year": 2025,
+      "categories": [
+        "Image"
+      ],
+      "featured": true,
+      "image": "gu2025starflow.jpeg",
+      "abstract": "We present STARFlow, a scalable generative model based on normalizing flows that achieves strong performance in high-resolution image synthesis. The core of STARFlow is Transformer Autoregressive Flow (TARFlow), which combines the expressive power of normalizing flows with the structured modeling capabilities of Autoregressive Transformers. We first establish the theoretical universality of TARFlow for modeling continuous distributions. Building on this foundation, we introduce several key architectural and algorithmic innovations to significantly enhance scalability: (1) a deep-shallow design, wherein a deep Transformer block captures most of the model representational capacity, complemented by a few shallow Transformer blocks that are computationally efficient yet substantially beneficial; (2) modeling in the latent space of pretrained autoencoders, which proves more effective than direct pixel-level modeling; and (3) a novel guidance algorithm that significantly boosts sample quality. Crucially, our model remains an end-to-end normalizing flow, enabling exact maximum likelihood training in continuous spaces without discretization. STARFlow achieves competitive performance in both class-conditional and text-conditional image generation tasks, approaching state-of-the-art diffusion models in sample quality. To our knowledge, this work is the first successful demonstration of normalizing flows operating effectively at this scale and resolution.",
+      "links": {
+        "arxiv": "https://arxiv.org/abs/2506.06276",
+        "code": "https://github.com/apple/ml-starflow"
+      },
+      "bibtex": "@inproceedings{gu2025starflow,\n  title     = {STARFlow: Scaling Latent Normalizing Flows for High-resolution Image Synthesis},\n  author    = {Gu, Jiatao and Chen, Tianrong and Berthelot, David and Zheng, Huangjie and Wang, Yuyang and Zhang, Ruixiang and Dinh, Laurent and Bautista, Miguel Angel and Susskind, Joshua and Zhai, Shuangfei},\n  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},\n  year      = {2025}\n}",
+      "tldr": "STARFlow scales latent normalizing flows to high-resolution, text- and class-conditional image synthesis — the first time normalizing flows work effectively at this scale and resolution, approaching state-of-the-art diffusion quality while remaining an exact-likelihood model.",
+      "contributions": [
+        "A deep–shallow design: a deep Transformer block carries most of the model's capacity, complemented by a few computationally efficient shallow blocks.",
+        "Modeling in the latent space of pretrained autoencoders rather than directly in pixels, which proves far more effective at high resolution.",
+        "A novel guidance algorithm that substantially boosts sample quality, with the model remaining an end-to-end maximum-likelihood normalizing flow."
+      ],
+      "size": "wide"
+    },
+    {
+      "id": "starflow-v",
+      "name": "STARFlow-V",
+      "title": "End-to-End Video Generative Modeling with Normalizing Flows",
+      "authors": "Jiatao Gu, Ying Shen, Tianrong Chen, Laurent Dinh, Yuyang Wang, Miguel Angel Bautista, David Berthelot, Joshua Susskind, Shuangfei Zhai",
+      "venue": "CVPR 2026",
+      "award": "Highlight",
+      "year": 2026,
+      "categories": [
+        "Video"
+      ],
+      "featured": true,
+      "image": "gu2025starflowv.mp4",
+      "external": "starflow-v/index.html",
+      "abstract": "Normalizing flows (NFs) are end-to-end likelihood-based generative models for continuous data, and have recently regained attention with encouraging progress on image generation. Yet in the video generation domain, where spatiotemporal complexity and computational cost are substantially higher, state-of-the-art systems almost exclusively rely on diffusion-based models. In this work, we revisit this design space by presenting STARFlow-V, a normalizing flow-based video generator with substantial benefits such as end-to-end learning, robust causal prediction, and native likelihood estimation. Building upon the recently proposed STARFlow, STARFlow-V operates in the spatiotemporal latent space with a global-local architecture which restricts causal dependencies to a global latent space while preserving rich local within-frame interactions. This eases error accumulation over time, a common pitfall of standard autoregressive diffusion model generation. Additionally, we propose flow-score matching, which equips the model with a light-weight causal denoiser to improve the video generation consistency in an autoregressive fashion. To improve the sampling efficiency, STARFlow-V employs a video-aware Jacobi iteration scheme that recasts inner updates as parallelizable iterations without breaking causality. Thanks to the invertible structure, the same model can natively support text-to-video, image-to-video as well as video-to-video generation tasks. Empirically, STARFlow-V achieves strong visual fidelity and temporal consistency with practical sampling throughput relative to diffusion-based baselines. These results present the first evidence, to our knowledge, that NFs are capable of high-quality autoregressive video generation, establishing them as a promising research direction for building world models.",
+      "links": {
+        "arxiv": "https://arxiv.org/abs/2511.20462",
+        "code": "https://github.com/apple/ml-starflow",
+        "page": "starflow-v/index.html"
+      },
+      "bibtex": "@inproceedings{gu2025starflowv,\n  title     = {STARFlow-V: End-to-End Video Generative Modeling with Normalizing Flows},\n  author    = {Gu, Jiatao and Shen, Ying and Chen, Tianrong and Dinh, Laurent and Wang, Yuyang and Bautista, Miguel Angel and Berthelot, David and Susskind, Joshua and Zhai, Shuangfei},\n  booktitle = {IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},\n  year      = {2026}\n}",
+      "size": "tall"
+    },
+    {
+      "id": "itarflow",
+      "name": "iTARFlow",
+      "title": "Normalizing Flows with Iterative Denoising",
+      "authors": "Tianrong Chen, Jiatao Gu, David Berthelot, Joshua Susskind, Shuangfei Zhai",
+      "venue": "ICML 2026",
+      "year": 2026,
+      "categories": [
+        "Image"
+      ],
+      "featured": false,
+      "image": "chen2026normalizing.png",
+      "abstract": "Normalizing Flows (NFs) are a classical family of likelihood-based methods that have received revived attention. Recent efforts such as TARFlow have shown that NFs are capable of achieving promising performance on image modeling tasks, making them viable alternatives to other methods such as diffusion models. In this work, we further advance the state of Normalizing Flow generative models by introducing iterative TARFlow (iTARFlow). Unlike diffusion models, iTARFlow maintains a fully end-to-end, likelihood-based objective during training. During sampling, it performs autoregressive generation followed by an iterative denoising procedure inspired by diffusion-style methods. Through extensive experiments, we show that iTARFlow achieves competitive performance across ImageNet resolutions of 64, 128, and 256 pixels, demonstrating its potential as a strong generative model and advancing the frontier of Normalizing Flows. In addition, we analyze the characteristic artifacts produced by iTARFlow, offering insights that may shed light on future improvements.",
+      "links": {
+        "arxiv": "https://arxiv.org/abs/2604.20041",
+        "code": "https://github.com/apple/ml-itarflow"
+      },
+      "bibtex": "@inproceedings{chen2026normalizing,\n  title     = {Normalizing Flows with Iterative Denoising},\n  author    = {Chen, Tianrong and Gu, Jiatao and Berthelot, David and Susskind, Joshua and Zhai, Shuangfei},\n  booktitle = {International Conference on Machine Learning (ICML)},\n  year      = {2026}\n}",
+      "tldr": "iTARFlow advances normalizing-flow image generation with a fully end-to-end likelihood objective at training time and a diffusion-style iterative denoising procedure at sampling time — staying competitive across ImageNet resolutions from 64 to 256.",
+      "contributions": [
+        "A fully end-to-end, likelihood-based training objective, unlike diffusion models.",
+        "Sampling that performs autoregressive generation followed by an iterative denoising procedure inspired by diffusion methods.",
+        "Competitive performance across ImageNet 64/128/256, with an analysis of characteristic artifacts pointing to future improvements."
+      ],
+      "fit": "contain",
+      "size": "sm"
+    },
+    {
+      "id": "nfm",
+      "name": "NFM",
+      "title": "The Coupling Within: Flow Matching via Distilled Normalizing Flows",
+      "authors": "David Berthelot, Tianrong Chen, Jiatao Gu, Marco Cuturi, Laurent Dinh, Bhavik Chandna, Michal Klein, Joshua Susskind, Shuangfei Zhai",
+      "venue": "arXiv 2026",
+      "year": 2026,
+      "categories": [
+        "Image",
+        "Theory"
+      ],
+      "featured": false,
+      "image": "nfm_example.png",
+      "abstract": "Flow models have rapidly become the go-to method for training and deploying large-scale generators, owing their success to inference-time flexibility via adjustable integration steps. A crucial ingredient in flow training is the choice of coupling measure for sampling noise/data pairs that define the flow matching (FM) regression loss. While FM training defaults usually to independent coupling, recent works show that adaptive couplings informed by noise/data distributions (e.g., via optimal transport, OT) improve both model training and inference. We radicalize this insight by shifting the paradigm: rather than computing adaptive couplings directly, we use distilled couplings from a different, pretrained model capable of placing noise and data spaces in bijection -- a property intrinsic to normalizing flows (NF) through their maximum likelihood and invertibility requirements. Leveraging recent advances in NF image generation via auto-regressive (AR) blocks, we propose Normalized Flow Matching (NFM), a new method that distills the quasi-deterministic coupling of pretrained NF models to train student flow models. These students achieve the best of both worlds: significantly outperforming flow models trained with independent or even OT couplings, while also improving on the teacher AR-NF model.",
+      "links": {
+        "arxiv": "https://arxiv.org/abs/2603.09014"
+      },
+      "bibtex": "@article{berthelot2026coupling,\n  title   = {The Coupling Within: Flow Matching via Distilled Normalizing Flows},\n  author  = {Berthelot, David and Chen, Tianrong and Gu, Jiatao and Cuturi, Marco and Dinh, Laurent and Chandna, Bhavik and Klein, Michal and Susskind, Joshua and Zhai, Shuangfei},\n  journal = {arXiv preprint arXiv:2603.09014},\n  year    = {2026}\n}",
+      "tldr": "Normalized Flow Matching distills the quasi-deterministic noise↔data coupling of a pretrained autoregressive normalizing flow to train flow-matching students — outperforming independent and even optimal-transport couplings, and improving on the teacher flow itself.",
+      "contributions": [
+        "A paradigm shift: rather than computing adaptive couplings directly, distill couplings from a pretrained model that places noise and data in bijection — a property intrinsic to normalizing flows.",
+        "Normalized Flow Matching (NFM): distilling the quasi-deterministic coupling of pretrained autoregressive NF models into student flow models.",
+        "Students that beat flow models trained with independent or optimal-transport couplings, while also improving on the teacher AR-NF model."
+      ],
+      "fit": "contain",
+      "size": "sm"
+    },
+    {
+      "id": "starflow2",
+      "name": "STARFlow2",
+      "title": "Bridging Language Models and Normalizing Flows for Unified Multimodal Generation",
+      "authors": "Ying Shen, Tianrong Chen, Yuan Gao, Yizhe Zhang, Yuyang Wang, Miguel Ángel Bautista, Shuangfei Zhai, Joshua M. Susskind, Jiatao Gu",
+      "venue": "arXiv 2026",
+      "year": 2026,
+      "categories": [
+        "Multimodal",
+        "Image",
+        "Language"
+      ],
+      "featured": true,
+      "image": "shen2026starflow2.png",
+      "abstract": "Deep generative models have advanced rapidly across text and vision, motivating unified multimodal systems that can understand, reason over, and generate interleaved text-image sequences. Most existing approaches combine autoregressive language modeling with diffusion-based image generators, inheriting a structural mismatch between causal text generation and iterative visual denoising. We observe that autoregressive normalizing flows are autoregressive Transformers--sharing the same causal mask, KV-cache mechanism, and left-to-right structure as LLMs--making them the most natural paradigm for true unified multimodal generation. We present STARFlow2, built on the Pretzel architecture that vertically interleaves a pretrained VLM stream with a TarFlow stream via residual skip connections, both operating under the same causal mask. Combined with a deep-shallow flow design and a unified FAE latent space, STARFlow2 enables cache-friendly interleaved generation where both text and visual outputs directly enter the KV-cache without re-encoding. Experiments demonstrate strong performance across image generation and multimodal understanding benchmarks, validating autoregressive flows as a viable foundation for unified multimodal modeling.",
+      "links": {
+        "arxiv": "https://arxiv.org/abs/2605.08029"
+      },
+      "bibtex": "@article{shen2026starflow2,\n  title   = {STARFlow2: Bridging Language Models and Normalizing Flows for Unified Multimodal Generation},\n  author  = {Shen, Ying and Chen, Tianrong and Gao, Yuan and Zhang, Yizhe and Wang, Yuyang and Bautista, Miguel Ángel and Zhai, Shuangfei and Susskind, Joshua M. and Gu, Jiatao},\n  journal = {arXiv preprint arXiv:2605.08029},\n  year    = {2026}\n}",
+      "tldr": "One model that understands, reasons over, and generates continuous images through a single autoregressive mechanism — bridging language models and normalizing flows for truly unified multimodal generation, with exact-likelihood training and cache-friendly interleaved text-and-image output.",
+      "contributions": [
+        "The Pretzel architecture: a frozen, pretrained VLM stream vertically interleaved with a TARFlow stream via skip connections — preserving visual understanding while adding high-fidelity image generation.",
+        "Normalizing flows that act as causal Transformers, sharing the causal mask and KV-cache with LLMs — enabling exact-likelihood training and cache-friendly interleaved generation without diffusion loops or visual re-encoding.",
+        "A three-stage training curriculum — text-to-image pretraining, image-to-text adapter learning, then interleaved joint learning — that adds generation without disrupting the pretrained VLM."
+      ],
+      "thread": [
+        {
+          "text": "Excited to share STARFlow2 from Apple MLR — 🥨 Bridging Language Models and Normalizing Flows for Unified Multimodal Generation. One model to understand, reason over, and generate continuous images with a single unified autoregressive mechanism.",
+          "images": [
+            "starflow2-t1.jpg"
+          ]
+        },
+        {
+          "text": "A core challenge in unified models is a structural mismatch: language models decode text causally with a KV-cache, while top image generators rely on iterative full-image denoising. This makes interleaved text-image generation unnatural and often requires re-encoding visual outputs.",
+          "images": [
+            "starflow2-t2.jpg",
+            "starflow2-t3.jpg"
+          ]
+        },
+        {
+          "text": "But do we have to use diffusion? Maybe there is a better option — normalizing flows. From our prior work STARFlow, we know normalizing flows can also be causal Transformers: the same causal mask, the same KV-cache, the same left-to-right structure as LLMs.",
+          "images": [
+            "starflow2-t4.jpg"
+          ]
+        },
+        {
+          "text": "We propose STARFlow2 as a natural bridge between LLMs and continuous image generation. It supports exact-likelihood training and enables cache-friendly interleaved text-image generation without discrete image tokenization, diffusion loops, or visual re-encoding.",
+          "images": [
+            "starflow2-t5.jpg"
+          ]
+        },
+        {
+          "text": "In practice, we introduce the 🥨 Pretzel architecture, which vertically interleaves a frozen pretrained VLM stream with a TARFlow stream through skip connections — preserving strong visual understanding while adding high-fidelity continuous image generation in one model.",
+          "images": [
+            "starflow2-t6.jpg"
+          ]
+        },
+        {
+          "text": "STARFlow2 is trained in three stages: (1) text-to-image pretraining, (2) image-to-text adapter learning, and (3) interleaved joint learning. This staged curriculum avoids disrupting the pretrained VLM while gradually aligning the TARFlow stream for bidirectional text-image interaction.",
+          "images": [
+            "starflow2-t7.jpg"
+          ]
+        },
+        {
+          "text": "Experiments show strong image generation while retaining VLM capabilities. Beyond understanding and generation, STARFlow2 also supports image editing and visual reasoning through generated intermediate images — all within the same causal autoregressive framework.",
+          "images": [
+            "starflow2-t8.jpg",
+            "starflow2-t9.jpg",
+            "starflow2-t10.jpg",
+            "starflow2-t11.jpg"
+          ]
+        },
+        {
+          "text": "Surprisingly, the standard 🥯 BAGEL (MoT) architecture did not work well for us. The issue was not modality specialization alone, but how to couple two very different computation streams — which led to 🥨 Pretzel and its vertical interleaving with skip connections.",
+          "images": [
+            "starflow2-t12.jpg",
+            "starflow2-t13.jpg"
+          ]
+        }
+      ],
+      "size": "lg"
+    },
+    {
+      "id": "ntm",
+      "name": "NTM",
+      "title": "Normalizing Trajectory Models",
+      "authors": "Jiatao Gu, Tianrong Chen, Ying Shen, David Berthelot, Shuangfei Zhai, Josh Susskind",
+      "venue": "arXiv 2026",
+      "year": 2026,
+      "categories": [
+        "Image",
+        "Theory"
+      ],
+      "featured": true,
+      "image": "gu2026normalizing.jpeg",
+      "abstract": "Diffusion-based models decompose sampling into many small Gaussian denoising steps -- an assumption that breaks down when generation is compressed to a few coarse transitions. Existing few-step methods address this through distillation, consistency training, or adversarial objectives, but sacrifice the likelihood framework in the process. We introduce Normalizing Trajectory Models (NTM), which models each reverse step as an expressive conditional normalizing flow with exact likelihood training. Architecturally, NTM combines shallow invertible blocks within each step with a deep parallel predictor across the trajectory, forming an end-to-end network trainable from scratch or initializable from pretrained flow-matching models. Its exact trajectory likelihood further enables self-distillation: a lightweight denoiser trained on the model's own score produces high-quality samples in four steps. On text-to-image benchmarks, NTM matches or outperforms strong image generation baselines in just four sampling steps while uniquely retaining exact likelihood over the generative trajectory.",
+      "links": {
+        "arxiv": "https://arxiv.org/abs/2605.08078"
+      },
+      "bibtex": "@article{gu2026normalizing,\n  title   = {Normalizing Trajectory Models},\n  author  = {Gu, Jiatao and Chen, Tianrong and Shen, Ying and Berthelot, David and Zhai, Shuangfei and Susskind, Josh},\n  journal = {arXiv preprint arXiv:2605.08078},\n  year    = {2026}\n}",
+      "tldr": "Normalizing Trajectory Models recast each reverse diffusion step as an expressive conditional normalizing flow with exact likelihood — delivering high-quality samples in just four steps while uniquely retaining exact likelihood over the entire generative trajectory.",
+      "contributions": [
+        "An architecture combining shallow invertible blocks within each reverse step and a deep parallel predictor across the trajectory, trainable end-to-end.",
+        "Initialization either from scratch or from pretrained flow-matching models, bridging diffusion and normalizing flows.",
+        "Exact trajectory likelihood that enables self-distillation: a lightweight denoiser trained on the model's own score yields four-step generation."
+      ],
+      "thread": [
+        {
+          "text": "Can fast generative models still be likelihood-based? Excited to share our new work from Apple MLR — Normalizing Trajectory Models (NTM): a step toward high-quality few-step generation with exact trajectory likelihood, powered by normalizing flows.",
+          "images": [
+            "ntm-t1.jpg"
+          ]
+        },
+        {
+          "text": "Diffusion and flow-matching models typically generate through many small steps, where simple denoising transitions are a reasonable approximation. But when we compress generation into only a few coarse steps, the reverse transitions become much more complex.",
+          "images": [
+            "ntm-t2.jpg"
+          ]
+        },
+        {
+          "text": "Most fast generators rely on distillation, consistency training, or adversarial / distribution-level objectives. They produce strong samples, but often move away from the likelihood-based formulation that made diffusion and flow models principled and scalable.",
+          "images": [
+            "ntm-t3.jpg"
+          ]
+        },
+        {
+          "text": "We take a different view: few-step generation can be trajectory density modeling. Instead of only learning a fast sampler, we learn a likelihood-based model over the full generative trajectory, so fast generation stays tied to an explicit probabilistic objective.",
+          "images": [
+            "ntm-t4.jpg"
+          ]
+        },
+        {
+          "text": "Concretely, NTM models each transition p(xₛ|xₜ) with an expressive conditional normalizing flow. This gives more flexibility than simple Gaussian denoising — enabling complex few-step transitions while keeping exact likelihood tractable over the full trajectory.",
+          "images": [
+            "ntm-t5.jpg"
+          ]
+        },
+        {
+          "text": "Architecturally, NTM combines shallow invertible autoregressive transporters with an image-level predictor. This allows training from scratch or initializing from a pretrained flow-matching model, then refining it into a likelihood-based trajectory model for fast generation.",
+          "images": [
+            "ntm-t6.png"
+          ]
+        },
+        {
+          "text": "Because NTM has exact trajectory likelihood, it provides direct and stable trajectory-score / denoising targets. We use them to train a lightweight denoiser, so sampling can bypass the costly shallow AR flow blocks while keeping NTM's trajectory knowledge.",
+          "images": [
+            "ntm-t7.jpg"
+          ]
+        },
+        {
+          "text": "Empirically, NTM shows that likelihood training and fast generation can coexist: strong few-step text-to-image results — from scratch or initialized from pretrained flow-matching models — plus a self-distilled 4-step denoiser derived from NTM's stable trajectory targets.",
+          "images": [
+            "ntm-t8.jpg"
+          ]
+        },
+        {
+          "text": "I'm very excited about this direction: expressive, likelihood-based modeling for fast generation — and, more broadly, as a potential foundation for tractable world models. Huge thanks to the amazing collaborators who made this work possible."
+        }
+      ],
+      "size": "tall"
+    },
+    {
+      "id": "tarflowlm",
+      "name": "TarFlowLM",
+      "title": "Flexible Language Modeling in Continuous Space with Transformer-based Autoregressive Flows",
+      "authors": "Ruixiang Zhang, Shuangfei Zhai, Jiatao Gu, Yizhe Zhang, Huangjie Zheng, Tianrong Chen, Miguel Angel Bautista, Joshua Susskind, Navdeep Jaitly",
+      "venue": "NeurIPS 2025",
+      "year": 2025,
+      "categories": [
+        "Language"
+      ],
+      "featured": false,
+      "image": "zhang2025flexible.png",
+      "abstract": "Autoregressive models have driven remarkable progress in language modeling. Their foundational reliance on discrete tokens, unidirectional context, and single-pass decoding, while central to their success, also inspires the exploration of a design space that could offer new axes of modeling flexibility. In this work, we explore an alternative paradigm, shifting language modeling from a discrete token space to a continuous latent space. We propose a novel framework TarFlowLM, that employs transformer-based autoregressive normalizing flows to model these continuous representations. This approach unlocks substantial flexibility, enabling the construction of models that can capture global bi-directional context through stacked, alternating-direction autoregressive transformations, support block-wise generation with flexible token patch sizes, and facilitate a hierarchical multi-pass generation process. We further propose new mixture-based coupling transformations designed to capture complex dependencies within the latent space shaped by discrete data, and demonstrate theoretical connections to conventional discrete autoregressive models. Extensive experiments on language modeling benchmarks demonstrate strong likelihood performance and highlight the flexible modeling capabilities inherent in our framework.",
+      "links": {
+        "arxiv": "https://arxiv.org/abs/2507.00425"
+      },
+      "bibtex": "@inproceedings{zhang2025flexible,\n  title     = {Flexible Language Modeling in Continuous Space with Transformer-based Autoregressive Flows},\n  author    = {Zhang, Ruixiang and Zhai, Shuangfei and Gu, Jiatao and Zhang, Yizhe and Zheng, Huangjie and Chen, Tianrong and Bautista, Miguel Angel and Susskind, Joshua and Jaitly, Navdeep},\n  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},\n  year      = {2025}\n}",
+      "tldr": "TarFlowLM shifts language modeling from discrete tokens to a continuous latent space using Transformer-based autoregressive normalizing flows — unlocking bidirectional context, flexible block sizes, and hierarchical multi-pass generation.",
+      "contributions": [
+        "A continuous-latent-space language model built on Transformer-based autoregressive normalizing flows.",
+        "Flexible generation: global bidirectional context via alternating-direction transforms, block-wise generation with flexible patch sizes, and hierarchical multi-pass decoding.",
+        "New mixture-based coupling transformations for discrete-data latents, with theoretical connections to conventional discrete autoregressive models."
+      ],
+      "fit": "contain",
+      "size": "sm"
+    },
+    {
+      "id": "fae",
+      "name": "FAE",
+      "title": "One Layer Is Enough: Adapting Pretrained Visual Encoders for Image Generation",
+      "authors": "Yuan Gao, Chen Chen, Tianrong Chen, Jiatao Gu",
+      "venue": "CVPR 2026",
+      "award": "Findings",
+      "year": 2026,
+      "categories": [
+        "Image"
+      ],
+      "featured": false,
+      "image": "gao2025one.png",
+      "abstract": "Visual generative models (e.g., diffusion models) typically operate in compressed latent spaces to balance training efficiency and sample quality. In parallel, there has been growing interest in leveraging high-quality pre-trained visual representations, either by aligning them inside VAEs or directly within the generative model. However, adapting such representations remains challenging due to fundamental mismatches between understanding-oriented features and generation-friendly latent spaces. Representation encoders benefit from high-dimensional latents that capture diverse hypotheses for masked regions, whereas generative models favor low-dimensional latents that must faithfully preserve injected noise. This discrepancy has led prior work to rely on complex objectives and architectures. In this work, we propose FAE (Feature Auto-Encoder), a simple yet effective framework that adapts pre-trained visual representations into low-dimensional latents suitable for generation using as little as a single attention layer, while retaining sufficient information for both reconstruction and understanding. The key is to couple two separate deep decoders: one trained to reconstruct the original feature space, and a second that takes the reconstructed features as input for image generation. FAE is generic; it can be instantiated with a variety of self-supervised encoders (e.g., DINO, SigLIP) and plugged into two distinct generative families: diffusion models and normalizing flows. Across class-conditional and text-to-image benchmarks, FAE achieves strong performance. For example, on ImageNet 256x256, our diffusion model with CFG attains a near state-of-the-art FID of 1.29 (800 epochs) and 1.70 (80 epochs). Without CFG, FAE reaches the state-of-the-art FID of 1.48 (800 epochs) and 2.08 (80 epochs), demonstrating both high quality and fast learning.",
+      "links": {
+        "arxiv": "https://arxiv.org/abs/2512.07829"
+      },
+      "bibtex": "@inproceedings{gao2025one,\n  title     = {One Layer Is Enough: Adapting Pretrained Visual Encoders for Image Generation},\n  author    = {Gao, Yuan and Chen, Chen and Chen, Tianrong and Gu, Jiatao},\n  booktitle = {IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Findings},\n  year      = {2026}\n}",
+      "tldr": "FAE adapts powerful pretrained visual encoders into generation-friendly low-dimensional latents using as little as a single attention layer — reaching state-of-the-art ImageNet-256 FID for both diffusion and normalizing-flow generators.",
+      "contributions": [
+        "Coupling two deep decoders: one reconstructs the original feature space, while a second turns the reconstructed features into images.",
+        "A one-attention-layer adapter that turns understanding-oriented features into low-dimensional, generation-ready latents.",
+        "Generic across encoders (DINO, SigLIP) and generative families, reaching SOTA ImageNet-256 FID (e.g. 1.48 without CFG)."
+      ],
+      "fit": "contain",
+      "size": "sm"
+    },
+    {
+      "id": "nf-cot",
+      "name": "NF-CoT",
+      "title": "Latent Reasoning with Normalizing Flows",
+      "authors": "Guancheng Tu, Xiangjun Fu, Suhao Yu, Yao Tang, Haoqiang Kang, Lianhui Qin, Yizhe Zhang, Jiatao Gu",
+      "venue": "arXiv 2026",
+      "year": 2026,
+      "categories": [
+        "Language",
+        "Theory"
+      ],
+      "featured": false,
+      "image": "N9yKdGkD9hF4vKUI.mp4",
+      "abstract": "Large language models often improve reasoning by generating explicit chain-of-thought (CoT), demonstrating the importance of intermediate computation. However, textual CoT forces this computation through a discrete, serial, and communication-oriented token stream: each reasoning step must be verbalized before the model can proceed, even when the underlying update is semantic, uncertain, or only partially formed. Latent reasoning offers a higher-bandwidth alternative by performing intermediate computation in compact continuous states before committing to text. Yet existing latent-reasoning methods often sacrifice key advantages that make CoT effective in autoregressive language models, including native left-to-right generation, probabilistic sampling, compatibility with KV-cache decoding, and tractable likelihood estimation. We propose NF-CoT, a latent reasoning framework that preserves these advantages by modeling continuous thoughts with normalizing flows. NF-CoT instantiates a TARFlow-style normalizing flow inside the LLM backbone, defining a tractable probability model over compact continuous thoughts distilled from explicit CoT. Continuous-thought positions are generated by an NF head, while text positions are generated by the standard LM head within the same causal stream. This design provides exact likelihoods for latent thoughts, enables probabilistic left-to-right decoding with the original KV cache, and supports direct policy-gradient optimization in the latent reasoning space. On code-generation benchmarks, NF-CoT improves pass rates over explicit-CoT and prior latent-reasoning baselines while substantially reducing intermediate-reasoning cost.",
+      "links": {
+        "arxiv": "https://arxiv.org/abs/2606.06447",
+        "page": "https://nf-cot.vercel.app"
+      },
+      "bibtex": "@misc{tu2026latentreasoningnormalizingflows,\n  title         = {Latent Reasoning with Normalizing Flows},\n  author        = {Tu, Guancheng and Fu, Xiangjun and Yu, Suhao and Tang, Yao and Kang, Haoqiang and Qin, Lianhui and Zhang, Yizhe and Gu, Jiatao},\n  year          = {2026},\n  eprint        = {2606.06447},\n  archivePrefix = {arXiv}\n}",
+      "external": "https://nf-cot.vercel.app",
+      "tldr": "NF-CoT moves chain-of-thought out of the verbose text channel into compact continuous \"thoughts\" modeled by a TARFlow-style normalizing flow inside the LLM — keeping native left-to-right decoding, KV-cache, probabilistic sampling, and exact likelihoods, while improving code-generation pass rates at lower reasoning cost.",
+      "size": "sm"
+    },
+    {
+      "id": "farmer",
+      "name": "FARMER",
+      "title": "FARMER: Flow AutoRegressive Transformer over Pixels",
+      "venue": "arXiv 2025",
+      "year": 2025,
+      "related": true,
+      "external": "https://arxiv.org/abs/2510.23588",
+      "categories": [
+        "Related"
+      ],
+      "links": {
+        "arxiv": "https://arxiv.org/abs/2510.23588"
+      }
+    },
+    {
+      "id": "simflow",
+      "name": "SimFlow",
+      "title": "SimFlow: Simplified and End-to-End Training of Latent Normalizing Flows",
+      "venue": "arXiv 2025",
+      "year": 2025,
+      "related": true,
+      "external": "https://arxiv.org/abs/2512.04084",
+      "categories": [
+        "Related"
+      ],
+      "links": {
+        "arxiv": "https://arxiv.org/abs/2512.04084"
+      }
+    },
+    {
+      "id": "bidirectional-nf",
+      "name": "Bidirectional NF",
+      "title": "Bidirectional Normalizing Flow: From Data to Noise and Back",
+      "venue": "arXiv 2025",
+      "year": 2025,
+      "related": true,
+      "external": "https://arxiv.org/abs/2512.10953",
+      "categories": [
+        "Related"
+      ],
+      "links": {
+        "arxiv": "https://arxiv.org/abs/2512.10953"
+      }
+    },
+    {
+      "id": "src-flow",
+      "name": "SRC-Flow",
+      "title": "SRC-Flow: Compact Semantic Representations Enable Normalizing Flows for Image Generation",
+      "venue": "arXiv 2026",
+      "year": 2026,
+      "related": true,
+      "external": "https://arxiv.org/abs/2605.18267",
+      "categories": [
+        "Related"
+      ],
+      "links": {
+        "arxiv": "https://arxiv.org/abs/2605.18267"
+      }
+    },
+    {
+      "id": "flowing-backwards",
+      "name": "Flowing Backwards",
+      "title": "Flowing Backwards: Improving Normalizing Flows via Reverse Representation Alignment",
+      "venue": "arXiv 2025",
+      "year": 2025,
+      "related": true,
+      "external": "https://arxiv.org/abs/2511.22345",
+      "categories": [
+        "Related"
+      ],
+      "links": {
+        "arxiv": "https://arxiv.org/abs/2511.22345"
+      }
+    },
+    {
+      "id": "gs-jacobi",
+      "name": "GS-Jacobi",
+      "title": "Accelerate TarFlow Sampling with GS-Jacobi Iteration",
+      "venue": "arXiv 2025",
+      "year": 2025,
+      "related": true,
+      "external": "https://arxiv.org/abs/2505.12849",
+      "categories": [
+        "Related"
+      ],
+      "links": {
+        "arxiv": "https://arxiv.org/abs/2505.12849"
+      }
+    },
+    {
+      "id": "selective-jacobi",
+      "name": "Selective Jacobi",
+      "title": "Inference Acceleration of Autoregressive Normalizing Flows by Selective Jacobi Decoding",
+      "venue": "arXiv 2025",
+      "year": 2025,
+      "related": true,
+      "external": "https://arxiv.org/abs/2505.24791",
+      "categories": [
+        "Related"
+      ],
+      "links": {
+        "arxiv": "https://arxiv.org/abs/2505.24791"
+      }
+    },
+    {
+      "id": "jetformer",
+      "name": "JetFormer",
+      "title": "JetFormer: An Autoregressive Generative Model of Raw Images and Text",
+      "venue": "arXiv 2024",
+      "year": 2024,
+      "related": true,
+      "external": "https://arxiv.org/abs/2411.19722",
+      "categories": [
+        "Related"
+      ],
+      "links": {
+        "arxiv": "https://arxiv.org/abs/2411.19722"
+      }
+    },
+    {
+      "id": "jet",
+      "name": "Jet",
+      "title": "Jet: A Modern Transformer-Based Normalizing Flow",
+      "venue": "arXiv 2024",
+      "year": 2024,
+      "related": true,
+      "external": "https://arxiv.org/abs/2412.15129",
+      "categories": [
+        "Related"
+      ],
+      "links": {
+        "arxiv": "https://arxiv.org/abs/2412.15129"
+      }
+    },
+    {
+      "id": "nice",
+      "name": "NICE",
+      "title": "NICE: Non-linear Independent Components Estimation",
+      "venue": "arXiv 2014",
+      "year": 2014,
+      "foundation": true,
+      "external": "https://arxiv.org/abs/1410.8516",
+      "categories": [
+        "Foundations"
+      ],
+      "links": {
+        "arxiv": "https://arxiv.org/abs/1410.8516"
+      }
+    },
+    {
+      "id": "realnvp",
+      "name": "RealNVP",
+      "title": "Density Estimation using Real NVP",
+      "venue": "ICLR 2017",
+      "year": 2016,
+      "foundation": true,
+      "external": "https://arxiv.org/abs/1605.08803",
+      "categories": [
+        "Foundations"
+      ],
+      "links": {
+        "arxiv": "https://arxiv.org/abs/1605.08803"
+      }
+    },
+    {
+      "id": "maf",
+      "name": "MAF",
+      "title": "Masked Autoregressive Flow for Density Estimation",
+      "venue": "NeurIPS 2017",
+      "year": 2017,
+      "foundation": true,
+      "external": "https://arxiv.org/abs/1705.07057",
+      "categories": [
+        "Foundations"
+      ],
+      "links": {
+        "arxiv": "https://arxiv.org/abs/1705.07057"
+      }
+    },
+    {
+      "id": "glow",
+      "name": "Glow",
+      "title": "Glow: Generative Flow with Invertible 1x1 Convolutions",
+      "venue": "NeurIPS 2018",
+      "year": 2018,
+      "foundation": true,
+      "external": "https://arxiv.org/abs/1807.03039",
+      "categories": [
+        "Foundations"
+      ],
+      "links": {
+        "arxiv": "https://arxiv.org/abs/1807.03039"
+      }
+    },
+    {
+      "id": "flowpp",
+      "name": "Flow++",
+      "title": "Flow++: Improving Flow-Based Generative Models with Variational Dequantization and Architecture Design",
+      "venue": "ICML 2019",
+      "year": 2019,
+      "foundation": true,
+      "external": "https://arxiv.org/abs/1902.00275",
+      "categories": [
+        "Foundations"
+      ],
+      "links": {
+        "arxiv": "https://arxiv.org/abs/1902.00275"
+      }
+    }
+  ]
+}

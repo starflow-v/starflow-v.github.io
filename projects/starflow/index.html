@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>STARFlow — Scalable Normalizing Flows</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/project.css">
+  <script>(function(){try{var t=localStorage.getItem("theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+</head>
+<body>
+<nav class="nav"><div class="wrap">
+    <a class="nav-brand" href="../../index.html">Scalable Normalizing Flows<span class="dot">.</span></a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="../../index.html#projects">Projects</a>
+        <a href="../../index.html#idea">The Idea</a>
+        <a href="../../index.html#foundations">Foundations</a>
+        <a href="../../index.html#research">Timeline</a>
+      </div>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light / dark theme">
+      <span class="ic-sun"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M19.4 4.6l-1.8 1.8M6.4 17.6l-1.8 1.8"/></svg></span><span class="ic-moon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></span>
+    </button>
+    </div>
+  </div></nav>
+<header class="proj-hero">
+  <div class="wrap">
+    <a class="back-link" href="../../index.html">← Back to all projects</a>
+    <h1 class="proj-name"><span class="gradient-text">STARFlow</span></h1>
+    <p class="proj-fulltitle">Scaling Latent Normalizing Flows for High-resolution Image Synthesis</p>
+    <div class="proj-venue">
+      <span class="venue-pill">NeurIPS 2025</span>
+      <span class="award-pill">Spotlight, top 3%</span>
+    </div>
+    <p class="proj-authors"><span class="me">Jiatao Gu</span>, Tianrong Chen, David Berthelot, Huangjie Zheng, Yuyang Wang, Ruixiang Zhang, Laurent Dinh, Miguel Angel Bautista, Joshua Susskind, Shuangfei Zhai</p>
+    <div class="link-row"><a class="btn" href="https://arxiv.org/abs/2506.06276" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>arXiv</a><a class="btn" href="https://github.com/apple/ml-starflow" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>Code</a></div>
+  </div>
+</header>
+
+<nav class="sec-nav"><a href="#tldr">TL;DR</a><a href="#abstract">Abstract</a><a href="#method">Method</a><a href="#contributions">Contributions</a><a href="#bibtex">BibTeX</a></nav>
+
+<div class="proj-body wrap">
+  <section class="sec" id="tldr">
+    <h3>TL;DR</h3>
+    <div class="tldr-box">STARFlow scales latent normalizing flows to high-resolution, text- and class-conditional image synthesis — the first time normalizing flows work effectively at this scale and resolution, approaching state-of-the-art diffusion quality while remaining an exact-likelihood model.</div>
+  </section>
+  
+  <section class="sec" id="abstract">
+    <h3>Abstract</h3>
+    <p class="proj-abstract">We present STARFlow, a scalable generative model based on normalizing flows that achieves strong performance in high-resolution image synthesis. The core of STARFlow is Transformer Autoregressive Flow (TARFlow), which combines the expressive power of normalizing flows with the structured modeling capabilities of Autoregressive Transformers. We first establish the theoretical universality of TARFlow for modeling continuous distributions. Building on this foundation, we introduce several key architectural and algorithmic innovations to significantly enhance scalability: (1) a deep-shallow design, wherein a deep Transformer block captures most of the model representational capacity, complemented by a few shallow Transformer blocks that are computationally efficient yet substantially beneficial; (2) modeling in the latent space of pretrained autoencoders, which proves more effective than direct pixel-level modeling; and (3) a novel guidance algorithm that significantly boosts sample quality. Crucially, our model remains an end-to-end normalizing flow, enabling exact maximum likelihood training in continuous spaces without discretization. STARFlow achieves competitive performance in both class-conditional and text-conditional image generation tasks, approaching state-of-the-art diffusion models in sample quality. To our knowledge, this work is the first successful demonstration of normalizing flows operating effectively at this scale and resolution.</p>
+  </section>
+  <section class="sec" id="method">
+    <h3>Method</h3>
+    <div class="proj-media wrap"><img src="../../assets/img/projects/gu2025starflow.jpeg" alt="STARFlow method figure"></div>
+    <p class="fig-caption">Overview figure from the paper — see the linked paper for full details.</p>
+  </section>
+  <section class="sec" id="contributions">
+    <h3>Key Contributions</h3>
+    <div class="contrib-grid">
+      <div class="contrib-card"><div class="contrib-num">1</div><p>A deep–shallow design: a deep Transformer block carries most of the model's capacity, complemented by a few computationally efficient shallow blocks.</p></div>
+      <div class="contrib-card"><div class="contrib-num">2</div><p>Modeling in the latent space of pretrained autoencoders rather than directly in pixels, which proves far more effective at high resolution.</p></div>
+      <div class="contrib-card"><div class="contrib-num">3</div><p>A novel guidance algorithm that substantially boosts sample quality, with the model remaining an end-to-end maximum-likelihood normalizing flow.</p></div>
+    </div>
+  </section>
+  
+  <section class="sec" id="bibtex">
+    <h3>BibTeX</h3>
+    <div class="bibtex-box">
+      <button class="copy-btn">Copy</button>
+      <pre>@inproceedings{gu2025starflow,
+  title     = {STARFlow: Scaling Latent Normalizing Flows for High-resolution Image Synthesis},
+  author    = {Gu, Jiatao and Chen, Tianrong and Berthelot, David and Zheng, Huangjie and Wang, Yuyang and Zhang, Ruixiang and Dinh, Laurent and Bautista, Miguel Angel and Susskind, Joshua and Zhai, Shuangfei},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year      = {2025}
+}</pre>
+    </div>
+  </section>
+</div>
+<div class="lightbox" id="lightbox"><button class="lb-close" aria-label="Close">×</button><img src="" alt=""></div>
+<footer class="site-foot">
+  <div class="wrap">© 2026 Jiatao Gu · <a href="../../index.html">Scalable Normalizing Flows</a></div>
+</footer>
+<script src="../../assets/js/project.js"></script>
+<script src="../../assets/js/theme.js"></script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>iTARFlow — Scalable Normalizing Flows</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/project.css">
+  <script>(function(){try{var t=localStorage.getItem("theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+</head>
+<body>
+<nav class="nav"><div class="wrap">
+    <a class="nav-brand" href="../../index.html">Scalable Normalizing Flows<span class="dot">.</span></a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="../../index.html#projects">Projects</a>
+        <a href="../../index.html#idea">The Idea</a>
+        <a href="../../index.html#foundations">Foundations</a>
+        <a href="../../index.html#research">Timeline</a>
+      </div>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light / dark theme">
+      <span class="ic-sun"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M19.4 4.6l-1.8 1.8M6.4 17.6l-1.8 1.8"/></svg></span><span class="ic-moon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></span>
+    </button>
+    </div>
+  </div></nav>
+<header class="proj-hero">
+  <div class="wrap">
+    <a class="back-link" href="../../index.html">← Back to all projects</a>
+    <h1 class="proj-name"><span class="gradient-text">iTARFlow</span></h1>
+    <p class="proj-fulltitle">Normalizing Flows with Iterative Denoising</p>
+    <div class="proj-venue">
+      <span class="venue-pill">ICML 2026</span>
+      
+    </div>
+    <p class="proj-authors">Tianrong Chen, <span class="me">Jiatao Gu</span>, David Berthelot, Joshua Susskind, Shuangfei Zhai</p>
+    <div class="link-row"><a class="btn" href="https://arxiv.org/abs/2604.20041" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>arXiv</a><a class="btn" href="https://github.com/apple/ml-itarflow" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>Code</a></div>
+  </div>
+</header>
+
+<nav class="sec-nav"><a href="#tldr">TL;DR</a><a href="#abstract">Abstract</a><a href="#method">Method</a><a href="#contributions">Contributions</a><a href="#bibtex">BibTeX</a></nav>
+
+<div class="proj-body wrap">
+  <section class="sec" id="tldr">
+    <h3>TL;DR</h3>
+    <div class="tldr-box">iTARFlow advances normalizing-flow image generation with a fully end-to-end likelihood objective at training time and a diffusion-style iterative denoising procedure at sampling time — staying competitive across ImageNet resolutions from 64 to 256.</div>
+  </section>
+  
+  <section class="sec" id="abstract">
+    <h3>Abstract</h3>
+    <p class="proj-abstract">Normalizing Flows (NFs) are a classical family of likelihood-based methods that have received revived attention. Recent efforts such as TARFlow have shown that NFs are capable of achieving promising performance on image modeling tasks, making them viable alternatives to other methods such as diffusion models. In this work, we further advance the state of Normalizing Flow generative models by introducing iterative TARFlow (iTARFlow). Unlike diffusion models, iTARFlow maintains a fully end-to-end, likelihood-based objective during training. During sampling, it performs autoregressive generation followed by an iterative denoising procedure inspired by diffusion-style methods. Through extensive experiments, we show that iTARFlow achieves competitive performance across ImageNet resolutions of 64, 128, and 256 pixels, demonstrating its potential as a strong generative model and advancing the frontier of Normalizing Flows. In addition, we analyze the characteristic artifacts produced by iTARFlow, offering insights that may shed light on future improvements.</p>
+  </section>
+  <section class="sec" id="method">
+    <h3>Method</h3>
+    <div class="proj-media wrap"><img src="../../assets/img/projects/chen2026normalizing.png" alt="iTARFlow method figure"></div>
+    <p class="fig-caption">Overview figure from the paper — see the linked paper for full details.</p>
+  </section>
+  <section class="sec" id="contributions">
+    <h3>Key Contributions</h3>
+    <div class="contrib-grid">
+      <div class="contrib-card"><div class="contrib-num">1</div><p>A fully end-to-end, likelihood-based training objective, unlike diffusion models.</p></div>
+      <div class="contrib-card"><div class="contrib-num">2</div><p>Sampling that performs autoregressive generation followed by an iterative denoising procedure inspired by diffusion methods.</p></div>
+      <div class="contrib-card"><div class="contrib-num">3</div><p>Competitive performance across ImageNet 64/128/256, with an analysis of characteristic artifacts pointing to future improvements.</p></div>
+    </div>
+  </section>
+  
+  <section class="sec" id="bibtex">
+    <h3>BibTeX</h3>
+    <div class="bibtex-box">
+      <button class="copy-btn">Copy</button>
+      <pre>@inproceedings{chen2026normalizing,
+  title     = {Normalizing Flows with Iterative Denoising},
+  author    = {Chen, Tianrong and Gu, Jiatao and Berthelot, David and Susskind, Joshua and Zhai, Shuangfei},
+  booktitle = {International Conference on Machine Learning (ICML)},
+  year      = {2026}
+}</pre>
+    </div>
+  </section>
+</div>
+<div class="lightbox" id="lightbox"><button class="lb-close" aria-label="Close">×</button><img src="" alt=""></div>
+<footer class="site-foot">
+  <div class="wrap">© 2026 Jiatao Gu · <a href="../../index.html">Scalable Normalizing Flows</a></div>
+</footer>
+<script src="../../assets/js/project.js"></script>
+<script src="../../assets/js/theme.js"></script>
+</body>
+</html>

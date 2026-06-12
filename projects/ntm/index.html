@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NTM — Scalable Normalizing Flows</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/project.css">
+  <script>(function(){try{var t=localStorage.getItem("theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+</head>
+<body>
+<nav class="nav"><div class="wrap">
+    <a class="nav-brand" href="../../index.html">Scalable Normalizing Flows<span class="dot">.</span></a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="../../index.html#projects">Projects</a>
+        <a href="../../index.html#idea">The Idea</a>
+        <a href="../../index.html#foundations">Foundations</a>
+        <a href="../../index.html#research">Timeline</a>
+      </div>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light / dark theme">
+      <span class="ic-sun"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M19.4 4.6l-1.8 1.8M6.4 17.6l-1.8 1.8"/></svg></span><span class="ic-moon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></span>
+    </button>
+    </div>
+  </div></nav>
+<header class="proj-hero">
+  <div class="wrap">
+    <a class="back-link" href="../../index.html">← Back to all projects</a>
+    <h1 class="proj-name"><span class="gradient-text">NTM</span></h1>
+    <p class="proj-fulltitle">Normalizing Trajectory Models</p>
+    <div class="proj-venue">
+      <span class="venue-pill">arXiv 2026</span>
+      
+    </div>
+    <p class="proj-authors"><span class="me">Jiatao Gu</span>, Tianrong Chen, Ying Shen, David Berthelot, Shuangfei Zhai, Josh Susskind</p>
+    <div class="link-row"><a class="btn" href="https://arxiv.org/abs/2605.08078" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>arXiv</a></div>
+  </div>
+</header>
+
+<nav class="sec-nav"><a href="#tldr">TL;DR</a><a href="#abstract">Abstract</a><a href="#walkthrough">How it works</a><a href="#bibtex">BibTeX</a></nav>
+
+<div class="proj-body wrap">
+  <section class="sec" id="tldr">
+    <h3>TL;DR</h3>
+    <div class="tldr-box">Normalizing Trajectory Models recast each reverse diffusion step as an expressive conditional normalizing flow with exact likelihood — delivering high-quality samples in just four steps while uniquely retaining exact likelihood over the entire generative trajectory.</div>
+  </section>
+  <section class="sec" id="abstract">
+    <h3>Abstract</h3>
+    <p class="proj-abstract">Diffusion-based models decompose sampling into many small Gaussian denoising steps -- an assumption that breaks down when generation is compressed to a few coarse transitions. Existing few-step methods address this through distillation, consistency training, or adversarial objectives, but sacrifice the likelihood framework in the process. We introduce Normalizing Trajectory Models (NTM), which models each reverse step as an expressive conditional normalizing flow with exact likelihood training. Architecturally, NTM combines shallow invertible blocks within each step with a deep parallel predictor across the trajectory, forming an end-to-end network trainable from scratch or initializable from pretrained flow-matching models. Its exact trajectory likelihood further enables self-distillation: a lightweight denoiser trained on the model's own score produces high-quality samples in four steps. On text-to-image benchmarks, NTM matches or outperforms strong image generation baselines in just four sampling steps while uniquely retaining exact likelihood over the generative trajectory.</p>
+  </section>
+  <section class="sec" id="walkthrough">
+    <h3>How it works</h3>
+    <div class="thread">
+      <div class="tw">
+        <p class="tw-text">Can fast generative models still be likelihood-based? Excited to share our new work from Apple MLR — Normalizing Trajectory Models (NTM): a step toward high-quality few-step generation with exact trajectory likelihood, powered by normalizing flows.</p>
+        <div class="tw-media n1"><a class="tw-shot" href="../../assets/img/projects/ntm-t1.jpg" data-lightbox><img src="../../assets/img/projects/ntm-t1.jpg" alt="" loading="lazy"></a></div>
+      </div>
+      <div class="tw">
+        <p class="tw-text">Diffusion and flow-matching models typically generate through many small steps, where simple denoising transitions are a reasonable approximation. But when we compress generation into only a few coarse steps, the reverse transitions become much more complex.</p>
+        <div class="tw-media n1"><a class="tw-shot" href="../../assets/img/projects/ntm-t2.jpg" data-lightbox><img src="../../assets/img/projects/ntm-t2.jpg" alt="" loading="lazy"></a></div>
+      </div>
+      <div class="tw">
+        <p class="tw-text">Most fast generators rely on distillation, consistency training, or adversarial / distribution-level objectives. They produce strong samples, but often move away from the likelihood-based formulation that made diffusion and flow models principled and scalable.</p>
+        <div class="tw-media n1"><a class="tw-shot" href="../../assets/img/projects/ntm-t3.jpg" data-lightbox><img src="../../assets/img/projects/ntm-t3.jpg" alt="" loading="lazy"></a></div>
+      </div>
+      <div class="tw">
+        <p class="tw-text">We take a different view: few-step generation can be trajectory density modeling. Instead of only learning a fast sampler, we learn a likelihood-based model over the full generative trajectory, so fast generation stays tied to an explicit probabilistic objective.</p>
+        <div class="tw-media n1"><a class="tw-shot" href="../../assets/img/projects/ntm-t4.jpg" data-lightbox><img src="../../assets/img/projects/ntm-t4.jpg" alt="" loading="lazy"></a></div>
+      </div>
+      <div class="tw">
+        <p class="tw-text">Concretely, NTM models each transition p(xₛ|xₜ) with an expressive conditional normalizing flow. This gives more flexibility than simple Gaussian denoising — enabling complex few-step transitions while keeping exact likelihood tractable over the full trajectory.</p>
+        <div class="tw-media n1"><a class="tw-shot" href="../../assets/img/projects/ntm-t5.jpg" data-lightbox><img src="../../assets/img/projects/ntm-t5.jpg" alt="" loading="lazy"></a></div>
+      </div>
+      <div class="tw">
+        <p class="tw-text">Architecturally, NTM combines shallow invertible autoregressive transporters with an image-level predictor. This allows training from scratch or initializing from a pretrained flow-matching model, then refining it into a likelihood-based trajectory model for fast generation.</p>
+        <div class="tw-media n1"><a class="tw-shot" href="../../assets/img/projects/ntm-t6.png" data-lightbox><img src="../../assets/img/projects/ntm-t6.png" alt="" loading="lazy"></a></div>
+      </div>
+      <div class="tw">
+        <p class="tw-text">Because NTM has exact trajectory likelihood, it provides direct and stable trajectory-score / denoising targets. We use them to train a lightweight denoiser, so sampling can bypass the costly shallow AR flow blocks while keeping NTM's trajectory knowledge.</p>
+        <div class="tw-media n1"><a class="tw-shot" href="../../assets/img/projects/ntm-t7.jpg" data-lightbox><img src="../../assets/img/projects/ntm-t7.jpg" alt="" loading="lazy"></a></div>
+      </div>
+      <div class="tw">
+        <p class="tw-text">Empirically, NTM shows that likelihood training and fast generation can coexist: strong few-step text-to-image results — from scratch or initialized from pretrained flow-matching models — plus a self-distilled 4-step denoiser derived from NTM's stable trajectory targets.</p>
+        <div class="tw-media n1"><a class="tw-shot" href="../../assets/img/projects/ntm-t8.jpg" data-lightbox><img src="../../assets/img/projects/ntm-t8.jpg" alt="" loading="lazy"></a></div>
+      </div>
+      <div class="tw">
+        <p class="tw-text">I'm very excited about this direction: expressive, likelihood-based modeling for fast generation — and, more broadly, as a potential foundation for tractable world models. Huge thanks to the amazing collaborators who made this work possible.</p>
+        
+      </div>
+    </div>
+  </section>
+  <section class="sec" id="bibtex">
+    <h3>BibTeX</h3>
+    <div class="bibtex-box">
+      <button class="copy-btn">Copy</button>
+      <pre>@article{gu2026normalizing,
+  title   = {Normalizing Trajectory Models},
+  author  = {Gu, Jiatao and Chen, Tianrong and Shen, Ying and Berthelot, David and Zhai, Shuangfei and Susskind, Josh},
+  journal = {arXiv preprint arXiv:2605.08078},
+  year    = {2026}
+}</pre>
+    </div>
+  </section>
+</div>
+<div class="lightbox" id="lightbox"><button class="lb-close" aria-label="Close">×</button><img src="" alt=""></div>
+<footer class="site-foot">
+  <div class="wrap">© 2026 Jiatao Gu · <a href="../../index.html">Scalable Normalizing Flows</a></div>
+</footer>
+<script src="../../assets/js/project.js"></script>
+<script src="../../assets/js/theme.js"></script>
+</body>
+</html>

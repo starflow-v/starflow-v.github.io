@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NFM — Scalable Normalizing Flows</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/project.css">
+  <script>(function(){try{var t=localStorage.getItem("theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+</head>
+<body>
+<nav class="nav"><div class="wrap">
+    <a class="nav-brand" href="../../index.html">Scalable Normalizing Flows<span class="dot">.</span></a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="../../index.html#projects">Projects</a>
+        <a href="../../index.html#idea">The Idea</a>
+        <a href="../../index.html#foundations">Foundations</a>
+        <a href="../../index.html#research">Timeline</a>
+      </div>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light / dark theme">
+      <span class="ic-sun"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M19.4 4.6l-1.8 1.8M6.4 17.6l-1.8 1.8"/></svg></span><span class="ic-moon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></span>
+    </button>
+    </div>
+  </div></nav>
+<header class="proj-hero">
+  <div class="wrap">
+    <a class="back-link" href="../../index.html">← Back to all projects</a>
+    <h1 class="proj-name"><span class="gradient-text">NFM</span></h1>
+    <p class="proj-fulltitle">The Coupling Within: Flow Matching via Distilled Normalizing Flows</p>
+    <div class="proj-venue">
+      <span class="venue-pill">arXiv 2026</span>
+      
+    </div>
+    <p class="proj-authors">David Berthelot, Tianrong Chen, <span class="me">Jiatao Gu</span>, Marco Cuturi, Laurent Dinh, Bhavik Chandna, Michal Klein, Joshua Susskind, Shuangfei Zhai</p>
+    <div class="link-row"><a class="btn" href="https://arxiv.org/abs/2603.09014" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>arXiv</a></div>
+  </div>
+</header>
+
+<nav class="sec-nav"><a href="#tldr">TL;DR</a><a href="#abstract">Abstract</a><a href="#method">Method</a><a href="#contributions">Contributions</a><a href="#bibtex">BibTeX</a></nav>
+
+<div class="proj-body wrap">
+  <section class="sec" id="tldr">
+    <h3>TL;DR</h3>
+    <div class="tldr-box">Normalized Flow Matching distills the quasi-deterministic noise↔data coupling of a pretrained autoregressive normalizing flow to train flow-matching students — outperforming independent and even optimal-transport couplings, and improving on the teacher flow itself.</div>
+  </section>
+  
+  <section class="sec" id="abstract">
+    <h3>Abstract</h3>
+    <p class="proj-abstract">Flow models have rapidly become the go-to method for training and deploying large-scale generators, owing their success to inference-time flexibility via adjustable integration steps. A crucial ingredient in flow training is the choice of coupling measure for sampling noise/data pairs that define the flow matching (FM) regression loss. While FM training defaults usually to independent coupling, recent works show that adaptive couplings informed by noise/data distributions (e.g., via optimal transport, OT) improve both model training and inference. We radicalize this insight by shifting the paradigm: rather than computing adaptive couplings directly, we use distilled couplings from a different, pretrained model capable of placing noise and data spaces in bijection -- a property intrinsic to normalizing flows (NF) through their maximum likelihood and invertibility requirements. Leveraging recent advances in NF image generation via auto-regressive (AR) blocks, we propose Normalized Flow Matching (NFM), a new method that distills the quasi-deterministic coupling of pretrained NF models to train student flow models. These students achieve the best of both worlds: significantly outperforming flow models trained with independent or even OT couplings, while also improving on the teacher AR-NF model.</p>
+  </section>
+  <section class="sec" id="method">
+    <h3>Method</h3>
+    <div class="proj-media wrap"><img src="../../assets/img/projects/nfm_example.png" alt="NFM method figure"></div>
+    <p class="fig-caption">Overview figure from the paper — see the linked paper for full details.</p>
+  </section>
+  <section class="sec" id="contributions">
+    <h3>Key Contributions</h3>
+    <div class="contrib-grid">
+      <div class="contrib-card"><div class="contrib-num">1</div><p>A paradigm shift: rather than computing adaptive couplings directly, distill couplings from a pretrained model that places noise and data in bijection — a property intrinsic to normalizing flows.</p></div>
+      <div class="contrib-card"><div class="contrib-num">2</div><p>Normalized Flow Matching (NFM): distilling the quasi-deterministic coupling of pretrained autoregressive NF models into student flow models.</p></div>
+      <div class="contrib-card"><div class="contrib-num">3</div><p>Students that beat flow models trained with independent or optimal-transport couplings, while also improving on the teacher AR-NF model.</p></div>
+    </div>
+  </section>
+  
+  <section class="sec" id="bibtex">
+    <h3>BibTeX</h3>
+    <div class="bibtex-box">
+      <button class="copy-btn">Copy</button>
+      <pre>@article{berthelot2026coupling,
+  title   = {The Coupling Within: Flow Matching via Distilled Normalizing Flows},
+  author  = {Berthelot, David and Chen, Tianrong and Gu, Jiatao and Cuturi, Marco and Dinh, Laurent and Chandna, Bhavik and Klein, Michal and Susskind, Joshua and Zhai, Shuangfei},
+  journal = {arXiv preprint arXiv:2603.09014},
+  year    = {2026}
+}</pre>
+    </div>
+  </section>
+</div>
+<div class="lightbox" id="lightbox"><button class="lb-close" aria-label="Close">×</button><img src="" alt=""></div>
+<footer class="site-foot">
+  <div class="wrap">© 2026 Jiatao Gu · <a href="../../index.html">Scalable Normalizing Flows</a></div>
+</footer>
+<script src="../../assets/js/project.js"></script>
+<script src="../../assets/js/theme.js"></script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FAE — Scalable Normalizing Flows</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/project.css">
+  <script>(function(){try{var t=localStorage.getItem("theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+</head>
+<body>
+<nav class="nav"><div class="wrap">
+    <a class="nav-brand" href="../../index.html">Scalable Normalizing Flows<span class="dot">.</span></a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="../../index.html#projects">Projects</a>
+        <a href="../../index.html#idea">The Idea</a>
+        <a href="../../index.html#foundations">Foundations</a>
+        <a href="../../index.html#research">Timeline</a>
+      </div>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light / dark theme">
+      <span class="ic-sun"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M19.4 4.6l-1.8 1.8M6.4 17.6l-1.8 1.8"/></svg></span><span class="ic-moon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></span>
+    </button>
+    </div>
+  </div></nav>
+<header class="proj-hero">
+  <div class="wrap">
+    <a class="back-link" href="../../index.html">← Back to all projects</a>
+    <h1 class="proj-name"><span class="gradient-text">FAE</span></h1>
+    <p class="proj-fulltitle">One Layer Is Enough: Adapting Pretrained Visual Encoders for Image Generation</p>
+    <div class="proj-venue">
+      <span class="venue-pill">CVPR 2026</span>
+      <span class="award-pill">Findings</span>
+    </div>
+    <p class="proj-authors">Yuan Gao, Chen Chen, Tianrong Chen, <span class="me">Jiatao Gu</span></p>
+    <div class="link-row"><a class="btn" href="https://arxiv.org/abs/2512.07829" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>arXiv</a></div>
+  </div>
+</header>
+
+<nav class="sec-nav"><a href="#tldr">TL;DR</a><a href="#abstract">Abstract</a><a href="#method">Method</a><a href="#contributions">Contributions</a><a href="#bibtex">BibTeX</a></nav>
+
+<div class="proj-body wrap">
+  <section class="sec" id="tldr">
+    <h3>TL;DR</h3>
+    <div class="tldr-box">FAE adapts powerful pretrained visual encoders into generation-friendly low-dimensional latents using as little as a single attention layer — reaching state-of-the-art ImageNet-256 FID for both diffusion and normalizing-flow generators.</div>
+  </section>
+  
+  <section class="sec" id="abstract">
+    <h3>Abstract</h3>
+    <p class="proj-abstract">Visual generative models (e.g., diffusion models) typically operate in compressed latent spaces to balance training efficiency and sample quality. In parallel, there has been growing interest in leveraging high-quality pre-trained visual representations, either by aligning them inside VAEs or directly within the generative model. However, adapting such representations remains challenging due to fundamental mismatches between understanding-oriented features and generation-friendly latent spaces. Representation encoders benefit from high-dimensional latents that capture diverse hypotheses for masked regions, whereas generative models favor low-dimensional latents that must faithfully preserve injected noise. This discrepancy has led prior work to rely on complex objectives and architectures. In this work, we propose FAE (Feature Auto-Encoder), a simple yet effective framework that adapts pre-trained visual representations into low-dimensional latents suitable for generation using as little as a single attention layer, while retaining sufficient information for both reconstruction and understanding. The key is to couple two separate deep decoders: one trained to reconstruct the original feature space, and a second that takes the reconstructed features as input for image generation. FAE is generic; it can be instantiated with a variety of self-supervised encoders (e.g., DINO, SigLIP) and plugged into two distinct generative families: diffusion models and normalizing flows. Across class-conditional and text-to-image benchmarks, FAE achieves strong performance. For example, on ImageNet 256x256, our diffusion model with CFG attains a near state-of-the-art FID of 1.29 (800 epochs) and 1.70 (80 epochs). Without CFG, FAE reaches the state-of-the-art FID of 1.48 (800 epochs) and 2.08 (80 epochs), demonstrating both high quality and fast learning.</p>
+  </section>
+  <section class="sec" id="method">
+    <h3>Method</h3>
+    <div class="proj-media wrap"><img src="../../assets/img/projects/gao2025one.png" alt="FAE method figure"></div>
+    <p class="fig-caption">Overview figure from the paper — see the linked paper for full details.</p>
+  </section>
+  <section class="sec" id="contributions">
+    <h3>Key Contributions</h3>
+    <div class="contrib-grid">
+      <div class="contrib-card"><div class="contrib-num">1</div><p>Coupling two deep decoders: one reconstructs the original feature space, while a second turns the reconstructed features into images.</p></div>
+      <div class="contrib-card"><div class="contrib-num">2</div><p>A one-attention-layer adapter that turns understanding-oriented features into low-dimensional, generation-ready latents.</p></div>
+      <div class="contrib-card"><div class="contrib-num">3</div><p>Generic across encoders (DINO, SigLIP) and generative families, reaching SOTA ImageNet-256 FID (e.g. 1.48 without CFG).</p></div>
+    </div>
+  </section>
+  
+  <section class="sec" id="bibtex">
+    <h3>BibTeX</h3>
+    <div class="bibtex-box">
+      <button class="copy-btn">Copy</button>
+      <pre>@inproceedings{gao2025one,
+  title     = {One Layer Is Enough: Adapting Pretrained Visual Encoders for Image Generation},
+  author    = {Gao, Yuan and Chen, Chen and Chen, Tianrong and Gu, Jiatao},
+  booktitle = {IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Findings},
+  year      = {2026}
+}</pre>
+    </div>
+  </section>
+</div>
+<div class="lightbox" id="lightbox"><button class="lb-close" aria-label="Close">×</button><img src="" alt=""></div>
+<footer class="site-foot">
+  <div class="wrap">© 2026 Jiatao Gu · <a href="../../index.html">Scalable Normalizing Flows</a></div>
+</footer>
+<script src="../../assets/js/project.js"></script>
+<script src="../../assets/js/theme.js"></script>
+</body>
+</html>
