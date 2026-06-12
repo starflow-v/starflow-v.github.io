@@ -571,6 +571,21 @@
       }
     },
     {
+      "id": "iaf",
+      "name": "IAF",
+      "title": "Improving Variational Inference with Inverse Autoregressive Flow",
+      "venue": "NeurIPS 2016",
+      "year": 2016,
+      "foundation": true,
+      "external": "https://arxiv.org/abs/1606.04934",
+      "categories": [
+        "Foundations"
+      ],
+      "links": {
+        "arxiv": "https://arxiv.org/abs/1606.04934"
+      }
+    },
+    {
       "id": "maf",
       "name": "MAF",
       "title": "Masked Autoregressive Flow for Density Estimation",
